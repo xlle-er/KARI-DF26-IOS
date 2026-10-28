@@ -1,0 +1,68 @@
+{
+  "fill": {
+    "linear-gradient": [
+      "extended-srgb:0.98039,0.98824,1.00000,1.00000",
+      "extended-srgb:0.94118,0.96078,0.98431,1.00000"
+    ]
+  },
+  "groups": [
+    {
+      "layers": [
+        {
+          "image-name": "KARI-Mark.svg",
+          "name": "KARI Mark"
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.15
+      },
+      "translucency": {
+        "enabled": false,
+        "value": 0.5
+      }
+    },
+    {
+      "name": "Diagonal Grid",
+      "layers": [
+        {
+          "image-name": "KARI-Grid.svg",
+          "image-name-specializations": [
+            {
+              "appearance": "dark",
+              "value": "KARI-Grid-Dark.svg"
+            }
+          ],
+          "name": "Subtle diagonal grid",
+          "glass": false,
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:0.25000,0.29000,0.35000,1.00000"
+              }
+            }
+          ]
+        }
+      ],
+      "shadow": {
+        "kind": "none",
+        "opacity": 0
+      },
+      "specular": false,
+      "translucency": {
+        "enabled": false,
+        "value": 0
+      }
+    }
+  ],
+  "supported-platforms": {
+    "squares": "shared"
+  },
+  "fill-specializations": [
+    {
+      "appearance": "dark",
+      "value": "system-dark"
+    }
+  ]
+}

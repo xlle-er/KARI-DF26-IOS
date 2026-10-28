@@ -9,7 +9,8 @@
     "check:localization": "python3 scripts/check-localization.py",
     "test:face": "playwright test",
     "check:privacy": "python3 scripts/check-privacy.py",
-    "test:device": "zsh scripts/test-device.sh"
+    "test:device": "zsh scripts/test-device.sh",
+    "build:icons": "node scripts/build-icons.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.55.1",

@@ -4,7 +4,7 @@
 # KARI DF26 · iOS
 
 <p align="center">
-  <img src="docs/assets/app-icon-rounded.svg" alt="KARI iOS App icon" width="128" height="128">
+  <img src="docs/assets/app-icon-rounded.png" alt="KARI iOS App icon" width="128" height="128">
 </p>
 
 <p align="center">
@@ -244,3 +244,9 @@ The initial hotspot-only firmware and 2.0.0 cannot store this option. For the fi
 设备管理 → 固件升级提供“预览版更新”开关，默认关闭，并记住本客户端的选择。关闭时只使用稳定版更新源；开启时同时比较正式版与预览版，优先选择更高语义版本，同版本优先正式版。预览版可能尚未完成硬件验证。检查结果和已下载固件均显示通道标签。切换通道会清空当前检查结果；关闭开关后，已缓存的预览包保留，但不能上传，需重新开启或下载稳定版。手动选择本地 .bin 不受在线通道开关限制，仍执行设备兼容和校验检查。
 
 Device management → Firmware update has a persistent **Preview firmware updates** toggle, off by default. Off selects stable releases; on compares both feeds by semantic version and selects the newer release, preferring stable on ties. Results and offline packages show their channel. Turning previews off blocks cached preview installation without deleting the package. Manually chosen local files remain an explicit action and still undergo compatibility/checksum validation.
+
+## 图标资源 / Icon artwork
+
+图标采用已确认的逆时针 45° K 与非等距格纹。Xcode 直接编译 `App/AppIcon.icon`；运行 `npm run build:icons` 可重新生成兼容 PNG 和带透明圆角的 README 图标（需要 macOS 与 Xcode / Icon Composer）。
+
+The approved icon uses a K rotated 45° counterclockwise with an aligned, unequally spaced grid. Xcode compiles `App/AppIcon.icon` directly. Run `npm run build:icons` on macOS with Xcode / Icon Composer to regenerate the compatibility PNG and transparent rounded README image.

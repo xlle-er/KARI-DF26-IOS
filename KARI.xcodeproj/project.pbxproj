@@ -5,6 +5,16 @@
 	"objectVersion" = "60";
 	"archiveVersion" = "1";
 	"objects" = {
+		"4B41524949434F4E30303031" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "folder.iconcomposer";
+			"path" = "AppIcon.icon";
+			"sourceTree" = "<group>";
+		};
+		"4B41524949434F4E30303032" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "4B41524949434F4E30303031";
+		};
 		"DFE23F3EDE0CCD2CD01DBF5A" = {
 			"isa" = "XCConfigurationList";
 			"buildConfigurations" = (
@@ -207,7 +217,7 @@
 				"PRODUCT_NAME" = "KARI";
 				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios";
 				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
-				"CURRENT_PROJECT_VERSION" = "13";
+				"CURRENT_PROJECT_VERSION" = "14";
 			};
 			"name" = "Debug";
 		};
@@ -229,7 +239,7 @@
 				"PRODUCT_NAME" = "KARI";
 				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios";
 				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
-				"CURRENT_PROJECT_VERSION" = "13";
+				"CURRENT_PROJECT_VERSION" = "14";
 			};
 			"name" = "Release";
 		};
@@ -849,6 +859,7 @@
 				"9582B6822FE993A50072D4E8",
 				"504EC3071FED79650016851F",
 				"504EC30E1FED79650016851F",
+				"4B41524949434F4E30303031",
 				"504EC3101FED79650016851F",
 				"504EC3131FED79650016851F",
 				"AABBCCDDEEFF001122334457",
@@ -1029,6 +1040,7 @@
 				"504EC3121FED79650016851F",
 				"AABBCCDDEEFF001122334456",
 				"504EC30F1FED79650016851F",
+				"4B41524949434F4E30303032",
 			);
 			"runOnlyForDeploymentPostprocessing" = "0";
 		};

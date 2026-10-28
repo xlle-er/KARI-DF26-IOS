@@ -16,3 +16,9 @@ Dependency source and license notices are supplied by Swift Package Manager / np
 EfficientDet-Lite0 int8 model: unmodified Google model, Apache-2.0. SHA-256 and source: `docs/model-manifest.json`. MediaPipe Tasks Vision is pinned to revision `e9794ef55e2509c09aa8b6ba1764b797db8eb200`; dependency licenses remain applicable. License texts for MediaPipe, TensorFlow Lite and bundled native components are retained in `licenses/`.
 
 The fixed burger test fixture comes from Google's MediaPipe sample assets: https://storage.googleapis.com/mediapipe-assets/burger.jpg . It is used only for detector regression tests.
+
+## KARI 图标 / KARI icon
+
+`App/AppIcon.icon`、`icon.png` 及 README 图标采用维护者于 2026-10-28 确认的原创 KARI 字形和对齐格纹，替代此前占位图标。图形与商标权利保留。
+
+`App/AppIcon.icon`, `icon.png`, and the README icon use the original KARI letterform and aligned grid approved by the maintainer on 2026-10-28, replacing the former placeholder. Artwork and trademark rights are reserved.
