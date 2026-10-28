@@ -1,5 +1,11 @@
 # iOS 1.3.0（12）功能说明
 
+**语言 / Language:** [简体中文](#简体中文) · [English](#english)
+
+## 简体中文
+
+> 本文保留原版本功能/自动验收基线；当前正式发布、构建号和维护者真机确认见[统一验证记录](https://github.com/xlle-er/KARI-DF26/blob/main/docs/validation.md)。历史“待测”不代表最新总体验收状态。
+
 基于 1.2.0，新增以下功能。业务源码位于 `Native/Sources/KariNative/`，最低兼容目标 iOS 15。
 
 ## 场景与生命状态
@@ -29,3 +35,33 @@
 相同业务源码在个人签名版完成 17 项单元与 6 项真机界面检查；公开工程只做编译、测试目标编译、静态分析、本地化、资源与隐私检查，不重复安装到手机。真实中英唤醒命中率、噪声误唤醒、30 分钟温升耗电和真实机器人运动／OTA仍需人工验收，不以自动检查替代。
 
 原有语音完整播放验证保留；本轮迁移没有重新运行云端语音测试。iOS 15 为最低编译目标，不代表覆盖所有系统和机型。眼睛及动作编排继续复用本地 Web 组件，设置、导航与文件操作为原生实现。
+
+## English
+
+Based on 1.2.0, with business sources in `Native/Sources/KariNative/` and minimum target iOS 15. The heading records the build-12 feature baseline; the current KARI stable build is 13.
+
+### Scenes and life state
+
+Personality → Idle scenes exposes six expressions and eleven chassis scenes; first/quiet/conversation-gap ranges; global/per-scene speed/duration, weight, cooldown, states, enablement and one-shot preview. Expressions alone are enabled by default; body actions need separate permission. Disabling all scenes does not force a replacement.
+
+Personality → Life state shows simulated energy, boredom, curiosity, closeness, loneliness, comfort, mood, attention, sleep and decisions. One monotonic-time scheduler pauses in the background without catch-up decay and resets each start. These are not physical sensor readings and do not infer distance, obstacles or identity. Safety and manual control override automation; speech, remote, following, actions, upgrades, disconnect and background constrain/cancel body idle. Old tasks cannot restore motion.
+
+### Foreground local wake
+
+Settings → Voice and wake is off by default, for Gemini / standard Vertex Live. Presets are “你好卡里” / “Hey KARI”. On-device Speech capability and permissions must exist for the selected language. There is no network-recognition fallback; manual wake remains available.
+
+Waiting creates no Live connection and uploads no microphone/video; local preview/detection may continue. One capture chain retains about 1 s pre-roll and up to 8 s connection buffering, handing over once in order. Overflow asks the user to repeat.
+
+Silence timeout defaults to 60 s, configurable 30–300; connection, speech, processing and playback do not count. Returning to waiting closes Live and clears audio/resumption, following and body idle. Failures preserve companionship with reasons and manual retry. Stop/background/calls cancel capture; foreground resumption is explicit. This is not lock-screen wake.
+
+### Interface and configuration
+
+System UITabBarController hosts Robot, Personality, a central play action, Vision and Settings. Four pages/subpages respect native safe areas. Companionship hides tabs; the upper-right stop follows control visibility. iOS 26+ uses system Liquid Glass for tabs/floating panels; older systems use native materials and forms remain standard controls.
+
+Personality JSON stays compatible. Full companion schemaVersion=1 includes personality, behavior, scenes and wake; validate all before atomic application and preserve old values on failure. Exports exclude runtime life state, transcripts, raw media and credentials; diagnostics remain redacted.
+
+### Validation boundary
+
+The historical build-12 baseline recorded 17 unit and 6 physical UI checks in the personal app; the public project used compile/static/localization/resource/privacy checks rather than a duplicate phone installation. See [current validation](https://github.com/xlle-er/KARI-DF26/blob/main/docs/validation.md) for migration results and maintainer confirmation. Synthetic tests do not establish real-speaker/noise accuracy or 30-minute thermals and robot motion/OTA results.
+
+Existing complete-speech checks were retained; migration did not repeat cloud voice tests. Minimum iOS 15 does not imply every OS/device was tested. Local Web resources retain eyes/choreography; settings/navigation/files are native.

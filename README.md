@@ -1,5 +1,6 @@
 > [KARI 统一使用文档](https://github.com/xlle-er/KARI-DF26) · 本次为新应用身份与新设备配置，需要重新安装和配置。当前验证结果见 [KARI 验证状态](https://github.com/xlle-er/KARI-DF26/blob/main/docs/validation.md)，历史验证不计入本次通过项。
 
+> [KARI unified user guide](https://github.com/xlle-er/KARI-DF26) · New application/device identities require a fresh install and configuration. See [current validation](https://github.com/xlle-er/KARI-DF26/blob/main/docs/validation.md) for migration checks and the maintainer’s physical-test confirmation.
 # KARI DF26 · iOS
 
 <p align="center">
@@ -140,7 +141,7 @@ An independent iOS client for the KARI desktop companion robot. It uses native S
 - **Manual remote:** switch between a joystick and direction pad, either independently or during companionship. Hold to drive and release to stop. Manual control pauses AI body movement; standalone remote starts neither AI nor camera.
 - **Nearby robot list:** names, identifier suffixes, signal strength, local aliases, ownership bookmarks, device information and motion tests.
 - **Provider presets:** Gemini, Vertex AI, Qwen, Groq, Fireworks, Ollama and compatible endpoints, with editable model defaults. Live speech requires a supported Live provider; other providers use text / vision requests.
-- **Local credentials:** enter your own API key; credentials are stored in the iOS Keychain, with compatibility for credentials saved by the original personal build. Body motion is enabled by default for each new companion session and requires a connected robot. Use the companion controls to disable or re-enable it. Stops, disconnects, faults and manual remote control revoke session permission.
+- **Local credentials:** enter your own API key; credentials are stored in the iOS Keychain. The new KARI application identity does not import historical-brand credentials; configure it again. Body motion is enabled by default for each new companion session and requires a connected robot. Use the companion controls to disable or re-enable it. Stops, disconnects, faults and manual remote control revoke session permission.
 
 The app UI supports Simplified Chinese and English. In **AI services → App language**, choose System default, 简体中文 or English. App statuses and errors update with the selection; iOS permission dialogs follow the system / per-app language setting.
 
