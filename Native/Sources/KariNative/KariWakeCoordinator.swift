@@ -67,7 +67,7 @@ import AVFoundation
         recognizer = service
         let input = SFSpeechAudioBufferRecognitionRequest()
         input.requiresOnDeviceRecognition = true; input.shouldReportPartialResults = true
-        input.contextualStrings = settings.preset == .chinese ? ["你好卡里", "你好卡里"] : ["Hey KARI"]
+        input.contextualStrings = settings.preset == .chinese ? ["你好卡里"] : ["Hey KARI"]
         request = input
         let id = UUID(); recognitionID = id
         recognition = service.recognitionTask(with: input) { [weak self] result, error in
