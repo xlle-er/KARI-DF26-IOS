@@ -1,0 +1,6 @@
+"NSBluetoothAlwaysUsageDescription" = "KARI uses Bluetooth to connect to nearby robot bodies.";
+"NSCameraUsageDescription" = "KARI uses the camera to understand the scenes you choose to share.";
+"NSLocalNetworkUsageDescription" = "KARI discovers and controls your robot over Wi-Fi and can connect to your configured local model service.";
+"NSMicrophoneUsageDescription" = "KARI uses the microphone for live conversations.";
+
+"NSSpeechRecognitionUsageDescription" = "KARI detects wake phrases using on-device speech recognition. Audio stays on your phone while waiting.";

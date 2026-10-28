@@ -1,0 +1,3442 @@
+#faceCanvas {
+  --eye-bg: #101012;
+  --eye-core: #bdf3ff;
+  --eye-glow: #2632ff;
+  --eye-scan: rgba(185, 255, 255, 0.72);
+  --blink-time: 360ms;
+  --soft-close-time: 420ms;
+  --sleep-time: 700ms;
+  --photo-time: 2400ms;
+  --follow-open-time: 900ms;
+  --follow-stop-time: 800ms;
+  --bite-time: 3200ms;
+  --finish-burger-time: 2200ms;
+  --drink-open-time: 1600ms;
+  --finish-drink-time: 1800ms;
+  --question-time: 2200ms;
+  --angry-time: 1800ms;
+  --love-time: 2400ms;
+  --shock-time: 1700ms;
+  --tell-open-time: 1400ms;
+  --tell-loop-time: 1600ms;
+  --tell-finish-time: 1200ms;
+  --kiss-time: 2600ms;
+  --wake-time: 1900ms;
+  --look-x: 0px;
+  --look-scale-y: 1;
+  --glow-dir: 1;
+  --expression-intensity: 1;
+  display: grid;
+  place-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  background: var(--eye-bg);
+}
+
+.kari-eyes {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(78px, calc(18 * var(--face-unit, 1vw)), 260px);
+  transform: translateX(var(--look-x)) scaleY(var(--look-scale-y));
+  transition: transform 520ms cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+.kari-eye {
+  position: relative;
+  width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+  height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+  transform: translateY(-10px);
+}
+
+.kari-eye__glow,
+.kari-eye__core {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.kari-eye__glow {
+  z-index: 1;
+  background: var(--eye-glow);
+  transform: translate(calc(var(--glow-dir) * 18px), 24px);
+  filter: blur(5px);
+  opacity: 0.94;
+  transition: transform 520ms cubic-bezier(0.2, 0.9, 0.25, 1), opacity 220ms ease;
+}
+
+.kari-eye__core {
+  z-index: 2;
+  background: var(--eye-core);
+  box-shadow: 0 0 2px rgba(210, 255, 255, 0.55);
+  transition: background 220ms ease, box-shadow 220ms ease;
+}
+
+.kari-eye__lid {
+  position: absolute;
+  z-index: 4;
+  left: -28%;
+  top: -42%;
+  width: 156%;
+  height: 86%;
+  border-radius: 0 0 58% 58% / 0 0 78% 78%;
+  background: var(--eye-bg);
+  transform: translateY(-120%);
+  pointer-events: none;
+}
+
+.kari-eye__love-lid {
+  position: absolute;
+  z-index: 4;
+  left: -18%;
+  top: auto;
+  bottom: -34%;
+  width: 136%;
+  height: 78%;
+  border-radius: 58% 58% 0 0 / 78% 78% 0 0;
+  background: var(--eye-bg);
+  transform: translateY(125%);
+  pointer-events: none;
+}
+
+.kari-eye__scan-line {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  width: 420%;
+  height: 9px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(95, 245, 255, 0.55) 16%,
+    var(--eye-scan) 50%,
+    rgba(95, 245, 255, 0.45) 84%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translate(-50%, -50%) scaleX(0.25);
+  pointer-events: none;
+}
+
+.kari-camera-icon {
+  position: absolute;
+  z-index: 6;
+  left: 50%;
+  bottom: 9%;
+  width: clamp(210px, calc(25 * var(--face-unit, 1vw)), 330px);
+  height: clamp(130px, calc(15 * var(--face-unit, 1vw)), 205px);
+  transform: translate(-50%, 140%) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.kari-camera-icon__body {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 5%;
+  height: 66%;
+  border-radius: 12px;
+  background: #f7f7f7;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.18);
+}
+
+.kari-camera-icon__body::before,
+.kari-camera-icon__body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 22%;
+  height: 100%;
+  background: #e9a13a;
+}
+
+.kari-camera-icon__body::before {
+  left: 0;
+}
+
+.kari-camera-icon__body::after {
+  right: 0;
+}
+
+.kari-camera-icon__top {
+  position: absolute;
+  left: 25%;
+  top: 6%;
+  width: 34%;
+  height: 26%;
+  border-radius: 8px 8px 0 0;
+  background: #f7f7f7;
+}
+
+.kari-camera-icon__lens {
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  width: 42%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background:
+    radial-gradient(circle at 48% 54%, #0c1719 0 20%, #0a6d66 21% 32%, #132527 33% 54%, #343434 55% 68%, #f3f3f3 69% 100%);
+  box-shadow: inset 0 0 0 5px #d8d8d8, 0 0 12px rgba(95, 245, 255, 0.25);
+}
+
+.kari-camera-icon__flash-dot {
+  position: absolute;
+  right: 25%;
+  top: 31%;
+  width: 9%;
+  aspect-ratio: 1;
+  border-radius: 3px;
+  background: #113434;
+  box-shadow: inset 0 0 0 3px #f7f7f7;
+}
+
+.kari-follow-target {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 7%;
+  width: clamp(120px, calc(15 * var(--face-unit, 1vw)), 210px);
+  height: clamp(210px, calc(24 * var(--face-unit, 1vw)), 340px);
+  opacity: 0;
+  transform: translate(-50%, 130%) rotate(-38deg) scale(0.9);
+  transform-origin: 50% 78%;
+  pointer-events: none;
+}
+
+.kari-follow-target::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 62%;
+  aspect-ratio: 1;
+  border: clamp(8px, calc(1 * var(--face-unit, 1vw)), 14px) solid #8fa4d4;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: rgba(220, 230, 248, 0.65);
+  box-shadow:
+    0 0 14px rgba(49, 216, 255, 0.65),
+    inset 0 0 12px rgba(255, 255, 255, 0.65);
+}
+
+.kari-follow-target::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: 22%;
+  height: 48%;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  background:
+    linear-gradient(180deg, #4a67ad 0 23%, #8fa4d4 24% 34%, #4a67ad 35% 45%, #ffc14d 46% 100%);
+  box-shadow: 0 0 10px rgba(49, 216, 255, 0.45);
+}
+
+.kari-follow-shine {
+  position: absolute;
+  z-index: 6;
+  left: 42%;
+  top: 10%;
+  width: 20%;
+  height: 8%;
+  border-radius: 999px;
+  border-top: 5px solid rgba(255, 255, 255, 0.85);
+  opacity: 0;
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+
+.kari-burger {
+  position: absolute;
+  z-index: 6;
+  left: 50%;
+  bottom: 11%;
+  width: clamp(95px, calc(11 * var(--face-unit, 1vw)), 165px);
+  height: clamp(75px, calc(8 * var(--face-unit, 1vw)), 120px);
+  opacity: 0;
+  transform: translate(-50%, 120%) scale(0.86);
+  pointer-events: none;
+}
+
+.kari-burger > * {
+  position: absolute;
+}
+
+.kari-burger__bun-top {
+  left: 8%;
+  top: 0;
+  width: 84%;
+  height: 42%;
+  border-radius: 999px 999px 18px 18px;
+  background: linear-gradient(#ffd36d, #e98725);
+  box-shadow: inset -8px -8px 0 rgba(190, 82, 12, 0.18), 0 0 10px rgba(255, 191, 58, 0.35);
+}
+
+.kari-burger__bun-top::before,
+.kari-burger__bun-top::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.kari-burger__bun-top::before {
+  left: 28%;
+  top: 28%;
+  transform: rotate(18deg);
+}
+
+.kari-burger__bun-top::after {
+  right: 24%;
+  top: 34%;
+  transform: rotate(-14deg);
+}
+
+.kari-burger__bite {
+  z-index: 4;
+  right: 3%;
+  top: -7%;
+  width: 36%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--eye-bg);
+  opacity: 0;
+  transform: scale(0.2);
+  box-shadow: -12px 14px 0 -2px var(--eye-bg), -30px 6px 0 -6px var(--eye-bg);
+}
+
+.kari-burger__cheese {
+  left: 12%;
+  top: 42%;
+  width: 76%;
+  height: 18%;
+  background: #ffd830;
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 70% 55%, 48% 100%, 26% 55%, 8% 100%);
+}
+
+.kari-burger__lettuce {
+  left: 10%;
+  top: 52%;
+  width: 80%;
+  height: 18%;
+  background: #35c74a;
+  border-radius: 999px;
+}
+
+.kari-burger__patty {
+  left: 13%;
+  top: 62%;
+  width: 74%;
+  height: 19%;
+  border-radius: 999px;
+  background: #6a2f1b;
+}
+
+.kari-burger__bun-bottom {
+  left: 12%;
+  bottom: 0;
+  width: 76%;
+  height: 25%;
+  border-radius: 12px 12px 999px 999px;
+  background: linear-gradient(#f4a63b, #d56d20);
+}
+
+.kari-eating-mouth {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: calc(11% + clamp(75px, calc(8 * var(--face-unit, 1vw)), 120px) - 2px);
+  width: clamp(52px, calc(5.2 * var(--face-unit, 1vw)), 82px);
+  height: clamp(32px, calc(3.2 * var(--face-unit, 1vw)), 50px);
+  opacity: 0;
+  transform: translate(-50%, 115px) scale(0.72);
+  pointer-events: none;
+}
+
+.kari-eating-mouth::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  width: 72%;
+  height: 72%;
+  border: clamp(5px, calc(0.6 * var(--face-unit, 1vw)), 8px) solid var(--eye-core);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 8px rgba(95, 245, 255, 0.72));
+}
+
+.kari-eating-mouth::after {
+  content: "";
+  position: absolute;
+  left: 63%;
+  top: 39%;
+  width: 12%;
+  height: 48%;
+  border-radius: 999px;
+  background: var(--eye-core);
+  transform: rotate(12deg);
+  filter: drop-shadow(0 0 6px rgba(95, 245, 255, 0.65));
+}
+
+.kari-eating-crumb {
+  position: absolute;
+  z-index: 7;
+  left: 50%;
+  top: 61%;
+  width: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffd36d;
+  opacity: 0;
+  box-shadow: 0 0 8px rgba(255, 211, 109, 0.55);
+  pointer-events: none;
+}
+
+.kari-drink-can {
+  position: absolute;
+  z-index: 8;
+  left: 50%;
+  bottom: 7%;
+  width: clamp(54px, calc(5.6 * var(--face-unit, 1vw)), 88px);
+  height: clamp(98px, calc(10.4 * var(--face-unit, 1vw)), 158px);
+  opacity: 0;
+  transform: translate(-50%, 130%) rotate(-13deg) scale(0.92);
+  border-radius: 13px 13px 20px 20px;
+  background:
+    linear-gradient(105deg, transparent 0 9%, rgba(255, 255, 255, 0.35) 10% 24%, transparent 25% 100%),
+    linear-gradient(90deg, #a53237 0 20%, #ffb5b5 21% 44%, #d74343 45% 72%, #8e272d 73%);
+  box-shadow: inset -8px 0 0 rgba(0, 0, 0, 0.16), 0 0 12px rgba(255, 80, 80, 0.3);
+  pointer-events: none;
+}
+
+.kari-drink-can::before {
+  content: "";
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  top: -8%;
+  height: 13%;
+  border-radius: 50%;
+  background: linear-gradient(#d7eef0, #7a9298);
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.18);
+}
+
+.kari-drink-can::after {
+  content: "COLA";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: white;
+  font: 900 clamp(10px, calc(1.25 * var(--face-unit, 1vw)), 16px) / 1 "IBM Plex Sans", "Segoe UI", sans-serif;
+  letter-spacing: 0.04em;
+  transform: translate(-50%, -50%) rotate(88deg);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.kari-drink-straw {
+  position: absolute;
+  z-index: 7;
+  left: 50%;
+  bottom: calc(7% + clamp(74px, calc(8 * var(--face-unit, 1vw)), 118px));
+  width: clamp(135px, calc(14.5 * var(--face-unit, 1vw)), 230px);
+  height: clamp(118px, calc(12.5 * var(--face-unit, 1vw)), 196px);
+  opacity: 0;
+  transform: translate(-50%, 100px) rotate(-13deg);
+  pointer-events: none;
+  overflow: visible;
+}
+
+.kari-drink-straw__path {
+  fill: none;
+  stroke: #e8e8e8;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.22));
+}
+
+.kari-drink-straw__shadow {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.18);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: translate(3px, 2px);
+}
+
+.kari-drink-mouth {
+  position: absolute;
+  z-index: 9;
+  left: 54.2%;
+  top: 60.6%;
+  width: clamp(50px, calc(5 * var(--face-unit, 1vw)), 84px);
+  height: clamp(38px, calc(3.8 * var(--face-unit, 1vw)), 64px);
+  opacity: 0;
+  transform: translate(-50%, 22px) scale(0.7);
+  pointer-events: none;
+}
+
+.kari-drink-mouth::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 56%;
+  height: 56%;
+  border: clamp(7px, calc(0.75 * var(--face-unit, 1vw)), 10px) solid #62eef3;
+  border-right: 0;
+  border-radius: 999px 0 0 999px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 8px rgba(95, 245, 255, 0.72));
+}
+
+.kari-sip-dot {
+  position: absolute;
+  z-index: 10;
+  left: 54.2%;
+  top: 60.6%;
+  width: clamp(6px, calc(0.7 * var(--face-unit, 1vw)), 11px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #62eef3;
+  opacity: 0;
+  box-shadow: 0 0 8px rgba(95, 245, 255, 0.8);
+  pointer-events: none;
+}
+
+.kari-question-mark {
+  position: absolute;
+  z-index: 5;
+  left: 61%;
+  top: 32%;
+  width: clamp(70px, calc(7.5 * var(--face-unit, 1vw)), 120px);
+  height: clamp(96px, calc(10 * var(--face-unit, 1vw)), 160px);
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(18px) rotate(-12deg) scale(0.55);
+  pointer-events: none;
+  filter: drop-shadow(0 0 10px rgba(139, 120, 255, 0.85));
+}
+
+.kari-question-mark svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.kari-question-mark__stroke {
+  fill: none;
+  stroke: #8b78ff;
+  stroke-width: 18;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kari-question-mark__highlight {
+  fill: none;
+  stroke: #b7aaff;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.55;
+}
+
+.kari-question-mark__dot {
+  fill: #8b78ff;
+  filter: drop-shadow(0 0 8px rgba(139, 120, 255, 0.9));
+}
+
+.kari-thought-dot {
+  position: absolute;
+  z-index: 5;
+  width: clamp(8px, calc(0.9 * var(--face-unit, 1vw)), 14px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #b7aaff;
+  opacity: 0;
+  box-shadow: 0 0 8px rgba(139, 120, 255, 0.75);
+  pointer-events: none;
+}
+
+.kari-thought-dot--one {
+  left: 57.5%;
+  top: 39%;
+}
+
+.kari-thought-dot--two {
+  left: 59.2%;
+  top: 36.5%;
+}
+
+.kari-angry-spark {
+  position: absolute;
+  z-index: 5;
+  right: 25%;
+  top: 24%;
+  width: clamp(76px, calc(7.8 * var(--face-unit, 1vw)), 126px);
+  height: clamp(76px, calc(7.8 * var(--face-unit, 1vw)), 126px);
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(14deg) scale(0.45);
+  pointer-events: none;
+  filter: drop-shadow(0 0 10px rgba(139, 120, 255, 0.9));
+}
+
+.kari-angry-spark svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.kari-angry-spark__main {
+  fill: none;
+  stroke: #8b78ff;
+  stroke-width: 11;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kari-angry-spark__highlight {
+  fill: none;
+  stroke: #c7bfff;
+  stroke-width: 5;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+
+.kari-loving-hearts {
+  position: absolute;
+  z-index: 5;
+  right: 23%;
+  top: 22%;
+  width: clamp(90px, calc(9 * var(--face-unit, 1vw)), 150px);
+  height: clamp(95px, calc(9.5 * var(--face-unit, 1vw)), 158px);
+  pointer-events: none;
+}
+
+.kari-loving-heart {
+  position: absolute;
+  width: clamp(16px, calc(1.7 * var(--face-unit, 1vw)), 28px);
+  height: clamp(16px, calc(1.7 * var(--face-unit, 1vw)), 28px);
+  opacity: 0;
+  transform: rotate(-45deg) scale(0.3);
+  background: #ff8bb5;
+  filter: drop-shadow(0 0 8px rgba(255, 139, 181, 0.85));
+}
+
+.kari-loving-heart::before,
+.kari-loving-heart::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.kari-loving-heart::before {
+  top: -50%;
+  left: 0;
+}
+
+.kari-loving-heart::after {
+  left: 50%;
+  top: 0;
+}
+
+.kari-loving-heart--one {
+  left: 20%;
+  top: 58%;
+}
+
+.kari-loving-heart--two {
+  left: 54%;
+  top: 34%;
+  width: clamp(13px, calc(1.35 * var(--face-unit, 1vw)), 22px);
+  height: clamp(13px, calc(1.35 * var(--face-unit, 1vw)), 22px);
+  background: #ffc1d6;
+}
+
+.kari-loving-heart--three {
+  left: 66%;
+  top: 68%;
+  width: clamp(10px, calc(1.05 * var(--face-unit, 1vw)), 18px);
+  height: clamp(10px, calc(1.05 * var(--face-unit, 1vw)), 18px);
+}
+
+.kari-loving-heart--four {
+  left: 40%;
+  top: 12%;
+  width: clamp(9px, calc(1 * var(--face-unit, 1vw)), 16px);
+  height: clamp(9px, calc(1 * var(--face-unit, 1vw)), 16px);
+  background: #ffc1d6;
+}
+
+.kari-shock-exclaim {
+  position: absolute;
+  z-index: 5;
+  right: 24%;
+  top: 27%;
+  width: clamp(44px, calc(4.6 * var(--face-unit, 1vw)), 78px);
+  height: clamp(92px, calc(9.2 * var(--face-unit, 1vw)), 150px);
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(12deg) scale(0.45);
+  pointer-events: none;
+  filter: drop-shadow(0 0 9px rgba(255, 214, 77, 0.8));
+}
+
+.kari-shock-exclaim__bar {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: clamp(10px, calc(1 * var(--face-unit, 1vw)), 16px);
+  height: 68%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff0a6, #ffd64d);
+  transform: translateX(-50%) rotate(9deg);
+}
+
+.kari-shock-exclaim__dot {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: clamp(14px, calc(1.4 * var(--face-unit, 1vw)), 22px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffd64d;
+  transform: translateX(-50%);
+  box-shadow: 0 0 8px rgba(255, 214, 77, 0.8);
+}
+
+.kari-tell-mouth {
+  position: absolute;
+  z-index: 6;
+  left: 50%;
+  top: 60%;
+  width: clamp(40px, calc(4 * var(--face-unit, 1vw)), 66px);
+  height: clamp(24px, calc(2.6 * var(--face-unit, 1vw)), 42px);
+  opacity: 0;
+  transform: translate(-50%, 10px) scale(0.7);
+  pointer-events: none;
+}
+
+.kari-tell-mouth::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 68%;
+  height: 52%;
+  border: clamp(5px, calc(0.55 * var(--face-unit, 1vw)), 7px) solid #71f7f5;
+  border-top: 0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-radius: 0 0 999px 999px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 8px rgba(95, 245, 255, 0.65));
+}
+
+.kari-tell-mic {
+  position: absolute;
+  z-index: 7;
+  width: clamp(72px, calc(7 * var(--face-unit, 1vw)), 115px);
+  height: clamp(150px, calc(14 * var(--face-unit, 1vw)), 235px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.kari-tell-mic::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 48%;
+  height: 34%;
+  border-radius: 999px 999px 30px 30px;
+  background: linear-gradient(145deg, #9ed8dc, #6f9dac);
+  transform: translateX(-50%);
+  box-shadow: 0 0 8px rgba(180, 255, 255, 0.18);
+}
+
+.kari-tell-mic::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 32%;
+  width: 14%;
+  height: 64%;
+  border-radius: 999px;
+  background: #86cbd1;
+  transform: translateX(-50%);
+}
+
+.kari-tell-mic__flag {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 43%;
+  min-width: 86%;
+  padding: 7px 9px;
+  color: white;
+  text-align: center;
+  font: 900 clamp(10px, calc(1.2 * var(--face-unit, 1vw)), 17px)/1 "IBM Plex Sans", "Segoe UI", sans-serif;
+  border-radius: 6px;
+  transform: translateX(-50%) rotate(-5deg);
+}
+
+.kari-tell-mic--left {
+  left: 31%;
+  bottom: 8%;
+  transform: translate(-120px, 180px) rotate(24deg);
+}
+
+.kari-tell-mic--left .kari-tell-mic__flag {
+  background: #ff9278;
+}
+
+.kari-tell-mic--right {
+  right: 31%;
+  bottom: 8%;
+  transform: translate(120px, 180px) rotate(-24deg);
+}
+
+.kari-tell-mic--right .kari-tell-mic__flag {
+  background: #41c7d8;
+}
+
+.kari-tell-spark {
+  position: absolute;
+  z-index: 8;
+  width: clamp(24px, calc(2.6 * var(--face-unit, 1vw)), 44px);
+  aspect-ratio: 1;
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 210, 0.85));
+}
+
+.kari-tell-spark::before,
+.kari-tell-spark::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 18%;
+  border-radius: 999px;
+  background: #fff6b0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.kari-tell-spark::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.kari-tell-spark--one {
+  left: 43%;
+  top: 39%;
+}
+
+.kari-tell-spark--two {
+  right: 39%;
+  top: 37%;
+  width: clamp(18px, calc(2 * var(--face-unit, 1vw)), 34px);
+}
+
+.kari-tell-spark--three {
+  left: 51%;
+  top: 30%;
+  width: clamp(14px, calc(1.6 * var(--face-unit, 1vw)), 28px);
+}
+
+.kari-wake-side-light {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  width: clamp(42px, calc(7 * var(--face-unit, 1vw)), 80px);
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.kari-wake-side-light--left {
+  left: 0;
+  transform: translateX(-60px);
+  background: linear-gradient(
+    90deg,
+    rgba(35, 220, 255, 0.78) 0%,
+    rgba(35, 220, 255, 0.52) 22%,
+    rgba(35, 220, 255, 0.24) 56%,
+    rgba(35, 220, 255, 0.08) 82%,
+    transparent 100%
+  );
+}
+
+.kari-wake-side-light--right {
+  right: 0;
+  transform: translateX(60px);
+  background: linear-gradient(
+    270deg,
+    rgba(35, 220, 255, 0.78) 0%,
+    rgba(35, 220, 255, 0.52) 22%,
+    rgba(35, 220, 255, 0.24) 56%,
+    rgba(35, 220, 255, 0.08) 82%,
+    transparent 100%
+  );
+}
+
+.kari-wake-spark {
+  position: absolute;
+  z-index: 9;
+  width: clamp(18px, calc(2 * var(--face-unit, 1vw)), 34px);
+  aspect-ratio: 1;
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 0 8px rgba(190, 255, 255, 0.9));
+}
+
+.kari-wake-spark::before,
+.kari-wake-spark::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 18%;
+  border-radius: 999px;
+  background: #bdfcff;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.kari-wake-spark::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.kari-wake-spark--one {
+  left: 23%;
+  top: 30%;
+}
+
+.kari-wake-spark--two {
+  right: 23%;
+  top: 31%;
+}
+
+.kari-wake-spark--three {
+  left: 50%;
+  top: 35%;
+  width: clamp(12px, calc(1.4 * var(--face-unit, 1vw)), 24px);
+}
+
+.kari-kiss-mouth {
+  position: absolute;
+  z-index: 8;
+  left: 50%;
+  top: 61%;
+  width: clamp(48px, calc(4.8 * var(--face-unit, 1vw)), 78px);
+  height: clamp(36px, calc(3.8 * var(--face-unit, 1vw)), 62px);
+  opacity: 0;
+  transform: translate(-50%, 10px) scale(0.5);
+  pointer-events: none;
+}
+
+.kari-kiss-mouth::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 60%;
+  height: 58%;
+  border: clamp(6px, calc(0.65 * var(--face-unit, 1vw)), 9px) solid #19d9ff;
+  border-right: 0;
+  border-radius: 999px 0 0 999px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 8px rgba(25, 217, 255, 0.78));
+}
+
+.kari-kiss-mouth::after {
+  content: "";
+  position: absolute;
+  left: 38%;
+  top: 50%;
+  width: 16%;
+  height: 16%;
+  border-radius: 50%;
+  background: #19d9ff;
+  opacity: 0.9;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 6px rgba(25, 217, 255, 0.7));
+}
+
+.kari-kiss-heart {
+  position: absolute;
+  z-index: 9;
+  left: 50%;
+  top: 58%;
+  width: clamp(28px, calc(3 * var(--face-unit, 1vw)), 50px);
+  height: clamp(28px, calc(3 * var(--face-unit, 1vw)), 50px);
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-45deg) scale(0.25);
+  background: #ff8bb5;
+  filter: drop-shadow(0 0 12px rgba(255, 139, 181, 0.9));
+  pointer-events: none;
+}
+
+.kari-kiss-heart::before,
+.kari-kiss-heart::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.kari-kiss-heart::before {
+  top: -50%;
+  left: 0;
+}
+
+.kari-kiss-heart::after {
+  left: 50%;
+  top: 0;
+}
+
+.kari-photo-preview {
+  position: absolute;
+  z-index: 7;
+  right: max(24px, 8%);
+  top: max(24px, 13%);
+  width: clamp(220px, calc(27 * var(--face-unit, 1vw)), 370px);
+  aspect-ratio: 1.18 / 1;
+  border: 4px solid #31d8ff;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateX(80px) scale(0.86);
+  background: #111;
+  box-shadow: 0 0 12px rgba(49, 216, 255, 0.75);
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.kari-photo-preview.is-visible {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+}
+
+.kari-photo-preview__image {
+  position: absolute;
+  left: 8%;
+  top: 8%;
+  width: 84%;
+  height: 58%;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #18222d;
+}
+
+.kari-photo-preview__actions {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 9%;
+  display: flex;
+  justify-content: space-between;
+  gap: 8%;
+}
+
+.kari-photo-preview__button {
+  flex: 1;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  font: 700 14px/36px "IBM Plex Mono", "SFMono-Regular", monospace;
+  text-align: center;
+  color: white;
+}
+
+.kari-photo-preview__button--delete {
+  background: #d43d36;
+}
+
+.kari-photo-preview__button--save {
+  background: #2c8aaa;
+}
+
+.kari-flash-screen {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.kari-eye-system.is-taking-picture .kari-eyes {
+  animation: kariPictureEyesMove var(--photo-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-taking-picture .kari-eye:first-child {
+  animation: kariPictureLeftEye var(--photo-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-taking-picture .kari-eye:last-child {
+  animation: kariPictureRightEye var(--photo-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-taking-picture .kari-camera-icon {
+  animation: kariCameraPop var(--photo-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-taking-picture .kari-flash-screen {
+  animation: kariPhotoFlash var(--photo-time) linear both;
+}
+
+.kari-eye-system.is-follow-opening .kari-follow-shine,
+.kari-eye-system.is-following .kari-follow-shine {
+  opacity: 1;
+}
+
+.kari-eye-system.is-follow-stopping .kari-follow-shine {
+  opacity: 0;
+}
+
+.kari-eye-system.is-follow-opening .kari-eyes {
+  animation: kariFollowOpenEyes var(--follow-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-follow-opening .kari-follow-target {
+  animation: kariFollowTargetOpen var(--follow-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-following .kari-eyes {
+  animation: kariFollowEyesLoop 1800ms cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+.kari-eye-system.is-following .kari-follow-target {
+  animation: kariFollowTargetLoop 1800ms cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+.kari-eye-system.is-follow-stopping .kari-eyes {
+  animation: kariFollowStopEyes var(--follow-stop-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-follow-stopping .kari-follow-target {
+  animation: kariFollowTargetStop var(--follow-stop-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-taking-bite .kari-eyes {
+  animation: kariEatEyes var(--bite-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-taking-bite .kari-eye {
+  animation: kariEatEye var(--bite-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-taking-bite .kari-burger {
+  animation: kariBurgerBiteMove var(--bite-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-taking-bite .kari-burger__bite {
+  animation: kariBiteAppear var(--bite-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-taking-bite .kari-eating-mouth {
+  animation: kariChew var(--bite-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-taking-bite .kari-eating-mouth::before {
+  animation: kariMouthLine var(--bite-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-taking-bite .kari-eating-mouth::after {
+  animation: kariMouthStem var(--bite-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-taking-bite .kari-eating-crumb--one {
+  animation: kariCrumbOne var(--bite-time) ease-out both;
+}
+
+.kari-eye-system.is-taking-bite .kari-eating-crumb--two {
+  animation: kariCrumbTwo var(--bite-time) ease-out both;
+}
+
+.kari-eye-system.is-bitten .kari-burger {
+  opacity: 1;
+  transform: translate(-50%, -4px) scale(0.96);
+}
+
+.kari-eye-system.is-bitten .kari-burger__bite {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.kari-eye-system.is-bitten .kari-eating-mouth {
+  opacity: 1;
+  transform: translate(-50%, 2px) scale(0.9);
+}
+
+.kari-eye-system.is-bitten .kari-eating-mouth::before {
+  left: 44%;
+  top: 42%;
+  width: 58%;
+  height: 34%;
+  border: clamp(5px, calc(0.6 * var(--face-unit, 1vw)), 8px) solid var(--eye-core);
+  border-top: 0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-radius: 0 0 999px 999px;
+  transform: translate(-50%, -50%) rotate(8deg);
+}
+
+.kari-eye-system.is-bitten .kari-eating-mouth::after {
+  opacity: 1;
+  left: 66%;
+  top: 28%;
+  height: 54%;
+  transform: rotate(8deg) scaleY(1);
+}
+
+.kari-eye-system.is-finishing-burger .kari-eyes {
+  animation: kariEatEyes var(--finish-burger-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-finishing-burger .kari-eye {
+  animation: kariEatEye var(--finish-burger-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-finishing-burger .kari-burger {
+  animation: kariBurgerFinishMove var(--finish-burger-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-finishing-burger .kari-burger__bite {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.kari-eye-system.is-finishing-burger .kari-eating-mouth {
+  animation: kariFinishChew var(--finish-burger-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-finishing-burger .kari-eating-mouth::before {
+  animation: kariFinishMouthLine var(--finish-burger-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-finishing-burger .kari-eating-mouth::after {
+  animation: kariFinishMouthStem var(--finish-burger-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-drink-opening .kari-eyes {
+  animation: kariDrinkEyesIn var(--drink-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-drink-opening .kari-eye {
+  animation: kariDrinkEyeIn var(--drink-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-drink-opening .kari-eye__core,
+.kari-eye-system.is-drink-opening .kari-eye__glow {
+  animation: kariDrinkEyeShapeIn var(--drink-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-drink-opening .kari-drink-can {
+  animation: kariDrinkCanIn var(--drink-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-drink-opening .kari-drink-straw {
+  animation: kariDrinkStrawIn var(--drink-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-drink-opening .kari-drink-mouth {
+  animation: kariDrinkMouthIn var(--drink-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-drinking .kari-eyes {
+  transform: translateX(0) scaleY(0.96);
+}
+
+.kari-eye-system.is-drinking .kari-eye {
+  width: clamp(126px, calc(23 * var(--face-unit, 1vw)), 265px);
+  height: clamp(70px, calc(9.4 * var(--face-unit, 1vw)), 136px);
+  transform: translateY(-70px);
+}
+
+.kari-eye-system.is-drinking .kari-eye__core,
+.kari-eye-system.is-drinking .kari-eye__glow {
+  border-radius: 999px 999px 30px 30px / 100% 100% 24px 24px;
+}
+
+.kari-eye-system.is-drinking .kari-drink-can {
+  opacity: 1;
+  transform: translate(-50%, -18px) rotate(-13deg) scale(1);
+}
+
+.kari-eye-system.is-drinking .kari-drink-straw {
+  opacity: 1;
+  transform: translate(-50%, -18px) rotate(-13deg);
+}
+
+.kari-eye-system.is-drinking .kari-drink-mouth {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.kari-eye-system.is-drinking .kari-sip-dot--one {
+  animation: kariSipDotOne 1600ms ease-out infinite;
+}
+
+.kari-eye-system.is-drinking .kari-sip-dot--two {
+  animation: kariSipDotTwo 1600ms ease-out infinite;
+}
+
+.kari-eye-system.is-drinking .kari-sip-dot--three {
+  animation: kariSipDotThree 1600ms ease-out infinite;
+}
+
+.kari-eye-system.is-drinking .kari-sip-dot--four {
+  animation: kariSipDotFour 1600ms ease-out infinite;
+}
+
+.kari-eye-system.is-finish-drinking .kari-eyes {
+  animation: kariDrinkEyesOut var(--finish-drink-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-finish-drinking .kari-eye {
+  animation: kariDrinkEyeOut var(--finish-drink-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-finish-drinking .kari-eye__core,
+.kari-eye-system.is-finish-drinking .kari-eye__glow {
+  animation: kariDrinkEyeShapeOut var(--finish-drink-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-finish-drinking .kari-drink-can {
+  animation: kariDrinkCanOut var(--finish-drink-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-finish-drinking .kari-drink-straw {
+  animation: kariDrinkStrawOut var(--finish-drink-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-finish-drinking .kari-drink-mouth {
+  animation: kariDrinkMouthOut var(--finish-drink-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-questioning .kari-eyes {
+  animation: kariCuriousEyes var(--question-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-questioning .kari-eye:first-child {
+  animation: kariLeftCuriousEye var(--question-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-questioning .kari-eye:last-child {
+  animation: kariRightCuriousEye var(--question-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-questioning .kari-question-mark {
+  animation: kariQuestionPop var(--question-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-questioning .kari-thought-dot--one {
+  animation: kariQuestionDotOne var(--question-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-questioning .kari-thought-dot--two {
+  animation: kariQuestionDotTwo var(--question-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-angry .kari-eyes {
+  animation: kariAngryShake var(--angry-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-angry .kari-eye:first-child {
+  animation: kariLeftAngryEye var(--angry-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-angry .kari-eye:last-child {
+  animation: kariRightAngryEye var(--angry-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-angry .kari-eye:first-child .kari-eye__lid {
+  animation: kariLeftAngryLid var(--angry-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-angry .kari-eye:last-child .kari-eye__lid {
+  animation: kariRightAngryLid var(--angry-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-angry .kari-angry-spark {
+  animation: kariAngrySparkPop var(--angry-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-loving .kari-eyes {
+  animation: kariLoveEyesMove var(--love-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-loving .kari-eye {
+  animation: kariLoveEyeBounce var(--love-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-loving .kari-eye__core {
+  background: #18d6d0;
+}
+
+.kari-eye-system.is-loving .kari-eye__glow {
+  background: #1834ff;
+}
+
+.kari-eye-system.is-loving .kari-eye__love-lid {
+  animation: kariLoveLid var(--love-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-loving .kari-loving-heart--one {
+  animation: kariHeartFloatOne var(--love-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-loving .kari-loving-heart--two {
+  animation: kariHeartFloatTwo var(--love-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-loving .kari-loving-heart--three {
+  animation: kariHeartFloatThree var(--love-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-loving .kari-loving-heart--four {
+  animation: kariHeartFloatFour var(--love-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-shocked .kari-eyes {
+  animation: kariShockEyesMove var(--shock-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-shocked .kari-eye {
+  animation: kariShockEyePulse var(--shock-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-shocked .kari-shock-exclaim {
+  animation: kariExclaimPop var(--shock-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-shocked .kari-shock-exclaim__bar {
+  animation: kariExclaimBarWiggle var(--shock-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-shocked .kari-shock-exclaim__dot {
+  animation: kariExclaimDotPop var(--shock-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-tell-opening .kari-eyes {
+  animation: kariTellEyesOpen var(--tell-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-tell-opening .kari-eye {
+  animation: kariTellEyeOpen var(--tell-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-tell-opening .kari-tell-mouth {
+  animation: kariTellMouthOpen var(--tell-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-tell-opening .kari-tell-mic--left {
+  animation: kariTellLeftMicOpen var(--tell-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-tell-opening .kari-tell-mic--right {
+  animation: kariTellRightMicOpen var(--tell-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-tell-opening .kari-tell-spark--one {
+  animation: kariTellSparkOne var(--tell-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-tell-opening .kari-tell-spark--two {
+  animation: kariTellSparkTwo var(--tell-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-tell-opening .kari-tell-spark--three {
+  animation: kariTellSparkThree var(--tell-open-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-telling .kari-eyes {
+  transform: translateX(0) scaleY(1);
+}
+
+.kari-eye-system.is-telling .kari-eye {
+  transform: translateY(-14px) scale(0.96);
+}
+
+.kari-eye-system.is-telling .kari-tell-mouth {
+  animation: kariTellMouthLoop var(--tell-loop-time) cubic-bezier(0.2, 0.9, 0.25, 1) infinite;
+}
+
+.kari-eye-system.is-telling .kari-tell-mic--left {
+  opacity: 1;
+  transform: translate(0, 0) rotate(24deg);
+}
+
+.kari-eye-system.is-telling .kari-tell-mic--right {
+  opacity: 1;
+  transform: translate(0, 0) rotate(-24deg);
+}
+
+.kari-eye-system.is-telling .kari-tell-spark--one {
+  animation: kariTellSparkOne var(--tell-loop-time) cubic-bezier(0.2, 0.9, 0.25, 1) infinite;
+}
+
+.kari-eye-system.is-telling .kari-tell-spark--two {
+  animation: kariTellSparkTwo var(--tell-loop-time) cubic-bezier(0.2, 0.9, 0.25, 1) infinite;
+}
+
+.kari-eye-system.is-telling .kari-tell-spark--three {
+  animation: kariTellSparkThree var(--tell-loop-time) cubic-bezier(0.2, 0.9, 0.25, 1) infinite;
+}
+
+.kari-eye-system.is-tell-finishing .kari-eyes {
+  animation: kariTellEyesFinish var(--tell-finish-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-tell-finishing .kari-eye {
+  animation: kariTellEyeFinish var(--tell-finish-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-tell-finishing .kari-tell-mouth {
+  animation: kariTellMouthFinish var(--tell-finish-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-tell-finishing .kari-tell-mic--left {
+  animation: kariTellLeftMicFinish var(--tell-finish-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-tell-finishing .kari-tell-mic--right {
+  animation: kariTellRightMicFinish var(--tell-finish-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-kissing .kari-eyes {
+  animation: kariKissEyesMove var(--kiss-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-kissing .kari-eye {
+  animation: kariKissEye var(--kiss-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-kissing .kari-eye__love-lid {
+  animation: kariKissLid var(--kiss-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-kissing .kari-kiss-mouth {
+  animation: kariKissMouth var(--kiss-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-kissing .kari-kiss-heart {
+  animation: kariBigKissHeart var(--kiss-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-wake-activating .kari-wake-side-light--left {
+  animation: kariWakeLeftLight var(--wake-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-wake-activating .kari-wake-side-light--right {
+  animation: kariWakeRightLight var(--wake-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-wake-activating .kari-wake-spark--one {
+  animation: kariWakeSparkOne var(--wake-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-wake-activating .kari-wake-spark--two {
+  animation: kariWakeSparkTwo var(--wake-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eye-system.is-wake-activating .kari-wake-spark--three {
+  animation: kariWakeSparkThree var(--wake-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eyes[data-expression="happy"] {
+  --eye-core: #c7fff3;
+  --eye-glow: #1f7dff;
+}
+
+.kari-eyes[data-expression="curious"],
+.kari-eyes[data-expression="attentive"] {
+  --eye-core: #d5fbff;
+  --eye-glow: #2632ff;
+}
+
+.kari-eyes[data-expression="scared"] {
+  --eye-core: #e9fcff;
+  --eye-glow: #4a4dff;
+}
+
+.kari-eyes[data-expression="shy"],
+.kari-eyes[data-expression="sad"] {
+  --eye-core: #bceaff;
+  --eye-glow: #3148c9;
+}
+
+.kari-eyes.is-speaking .kari-eye__glow {
+  opacity: 1;
+  animation: kariSpeakingGlow 520ms ease-in-out infinite alternate;
+}
+
+.kari-eyes.is-speaking .kari-eye__core {
+  box-shadow: 0 0 calc(8px + 8px * var(--expression-intensity)) rgba(189, 243, 255, 0.32);
+}
+
+.kari-eyes.is-blinking .kari-eye {
+  animation: kariEyeBlink var(--blink-time) ease-in-out both;
+}
+
+.kari-eyes.is-blinking .kari-eye__core,
+.kari-eyes.is-blinking .kari-eye__glow {
+  animation: kariShapeBlink var(--blink-time) ease-in-out both;
+}
+
+.kari-eyes.is-blinking .kari-eye__glow {
+  animation-name: kariShapeBlink, kariGlowBlink;
+  animation-duration: var(--blink-time), var(--blink-time);
+  animation-timing-function: ease-in-out, ease-in-out;
+  animation-fill-mode: both, both;
+}
+
+.kari-eyes.is-blinking .kari-eye__scan-line {
+  animation: kariScanBlink var(--blink-time) ease-in-out both;
+}
+
+.kari-eyes.is-soft-closing .kari-eye {
+  animation: kariEyeSoftClose var(--soft-close-time) ease-in-out both;
+}
+
+.kari-eyes.is-soft-closing .kari-eye__core,
+.kari-eyes.is-soft-closing .kari-eye__glow {
+  animation: kariShapeSoftClose var(--soft-close-time) ease-in-out both;
+}
+
+.kari-eyes.is-soft-closing .kari-eye__glow {
+  animation-name: kariShapeSoftClose, kariGlowSoftClose;
+  animation-duration: var(--soft-close-time), var(--soft-close-time);
+  animation-timing-function: ease-in-out, ease-in-out;
+  animation-fill-mode: both, both;
+}
+
+.kari-eyes.is-sleeping .kari-eye {
+  animation: kariEyeSleep var(--sleep-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eyes.is-sleeping .kari-eye__core,
+.kari-eyes.is-sleeping .kari-eye__glow {
+  animation: kariShapeSleep var(--sleep-time) cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.kari-eyes.is-sleeping .kari-eye__glow {
+  animation-name: kariShapeSleep, kariGlowSleep;
+  animation-duration: var(--sleep-time), var(--sleep-time);
+  animation-timing-function: cubic-bezier(0.2, 0.9, 0.25, 1), cubic-bezier(0.2, 0.9, 0.25, 1);
+  animation-fill-mode: both, both;
+}
+
+.kari-eyes.is-sleeping .kari-eye__scan-line {
+  opacity: 0;
+}
+
+@keyframes kariEyeBlink {
+  0%,
+  100% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px);
+  }
+
+  42%,
+  58% {
+    width: clamp(150px, calc(32 * var(--face-unit, 1vw)), 305px);
+    height: clamp(18px, calc(3.4 * var(--face-unit, 1vw)), 34px);
+    transform: translateY(-10px);
+  }
+
+  72% {
+    width: clamp(138px, calc(29 * var(--face-unit, 1vw)), 282px);
+    height: clamp(44px, calc(7 * var(--face-unit, 1vw)), 72px);
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes kariEyeSoftClose {
+  0%,
+  100% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px);
+  }
+
+  45%,
+  60% {
+    width: clamp(138px, calc(27 * var(--face-unit, 1vw)), 274px);
+    height: clamp(58px, calc(10 * var(--face-unit, 1vw)), 110px);
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes kariEyeSleep {
+  0% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px);
+  }
+
+  45% {
+    width: clamp(138px, calc(27 * var(--face-unit, 1vw)), 274px);
+    height: clamp(58px, calc(10 * var(--face-unit, 1vw)), 110px);
+    transform: translateY(-4px);
+  }
+
+  100% {
+    width: clamp(148px, calc(30 * var(--face-unit, 1vw)), 292px);
+    height: clamp(24px, calc(4 * var(--face-unit, 1vw)), 44px);
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes kariShapeBlink {
+  0%,
+  100% {
+    border-radius: 50%;
+  }
+
+  42%,
+  72% {
+    border-radius: 999px;
+  }
+}
+
+@keyframes kariShapeSoftClose {
+  0%,
+  100% {
+    border-radius: 50%;
+  }
+
+  45%,
+  60% {
+    border-radius: 999px;
+  }
+}
+
+@keyframes kariShapeSleep {
+  0% {
+    border-radius: 50%;
+  }
+
+  45% {
+    border-radius: 4px 4px 999px 999px / 4px 4px 100% 100%;
+  }
+
+  100% {
+    border-radius: 8px 8px 999px 999px / 8px 8px 100% 100%;
+  }
+}
+
+@keyframes kariGlowBlink {
+  0%,
+  100% {
+    transform: translate(calc(var(--glow-dir) * 18px), 24px);
+    filter: blur(5px);
+    opacity: 0.94;
+  }
+
+  42%,
+  58% {
+    transform: translate(calc(var(--glow-dir) * 16px), 12px);
+    filter: blur(5px);
+    opacity: 0.88;
+  }
+
+  72% {
+    transform: translate(calc(var(--glow-dir) * 17px), 16px);
+    filter: blur(5px);
+    opacity: 0.9;
+  }
+}
+
+@keyframes kariGlowSoftClose {
+  0%,
+  100% {
+    transform: translate(calc(var(--glow-dir) * 18px), 24px);
+    filter: blur(5px);
+    opacity: 0.94;
+  }
+
+  45%,
+  60% {
+    transform: translate(calc(var(--glow-dir) * 17px), 20px);
+    filter: blur(5px);
+    opacity: 0.9;
+  }
+}
+
+@keyframes kariGlowSleep {
+  0% {
+    transform: translate(calc(var(--glow-dir) * 18px), 24px);
+    filter: blur(5px);
+    opacity: 0.94;
+  }
+
+  45% {
+    transform: translate(calc(var(--glow-dir) * 17px), 18px);
+    filter: blur(5px);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translate(calc(var(--glow-dir) * 14px), 12px);
+    filter: blur(5px);
+    opacity: 0.9;
+  }
+}
+
+@keyframes kariWakeLeftLight {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  34% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  72% {
+    opacity: 0.9;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+}
+
+@keyframes kariWakeRightLight {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+
+  34% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  72% {
+    opacity: 0.9;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+}
+
+@keyframes kariWakeSparkOne {
+  0%,
+  34%,
+  62%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0);
+  }
+
+  44% {
+    opacity: 1;
+    transform: scale(1.15) rotate(18deg);
+  }
+
+  52% {
+    opacity: 0.75;
+    transform: scale(0.85) rotate(-12deg);
+  }
+}
+
+@keyframes kariWakeSparkTwo {
+  0%,
+  42%,
+  72%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0);
+  }
+
+  52% {
+    opacity: 1;
+    transform: scale(1.1) rotate(-16deg);
+  }
+
+  62% {
+    opacity: 0.7;
+    transform: scale(0.85) rotate(12deg);
+  }
+}
+
+@keyframes kariWakeSparkThree {
+  0%,
+  26%,
+  48%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0);
+  }
+
+  34% {
+    opacity: 0.9;
+    transform: scale(1) rotate(14deg);
+  }
+}
+
+@keyframes kariFollowOpenEyes {
+  0% {
+    transform: translateX(var(--look-x)) scaleY(var(--look-scale-y));
+  }
+
+  35% {
+    transform: translateX(0) scaleY(0.9);
+  }
+
+  70% {
+    transform: translateX(-22px) scaleY(1.04);
+  }
+
+  100% {
+    transform: translateX(-52px) scaleY(0.96);
+  }
+}
+
+@keyframes kariFollowTargetOpen {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 130%) rotate(-38deg) scale(0.9);
+  }
+
+  65% {
+    opacity: 1;
+    transform: translate(-50%, 8%) rotate(-38deg) scale(1.04);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(calc(-50% - 70px), 0) rotate(-46deg) scale(1);
+  }
+}
+
+@keyframes kariFollowEyesLoop {
+  0%,
+  100% {
+    transform: translateX(-52px) scaleY(0.96);
+  }
+
+  25% {
+    transform: translateX(-18px) scaleY(1);
+  }
+
+  50% {
+    transform: translateX(52px) scaleY(0.96);
+  }
+
+  75% {
+    transform: translateX(18px) scaleY(1);
+  }
+}
+
+@keyframes kariFollowTargetLoop {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translate(calc(-50% - 70px), 0) rotate(-46deg) scale(1);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translate(calc(-50% - 24px), -8%) rotate(-34deg) scale(0.98);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(calc(-50% + 70px), 0) rotate(-30deg) scale(1);
+  }
+
+  75% {
+    opacity: 1;
+    transform: translate(calc(-50% + 24px), -8%) rotate(-42deg) scale(0.98);
+  }
+}
+
+@keyframes kariFollowStopEyes {
+  0% {
+    transform: translateX(52px) scaleY(0.96);
+  }
+
+  45% {
+    transform: translateX(0) scaleY(0.88);
+  }
+
+  100% {
+    transform: translateX(var(--look-x)) scaleY(var(--look-scale-y));
+  }
+}
+
+@keyframes kariFollowTargetStop {
+  0% {
+    opacity: 1;
+    transform: translate(calc(-50% + 70px), 0) rotate(-30deg) scale(1);
+  }
+
+  40% {
+    opacity: 1;
+    transform: translate(-50%, -4%) rotate(-38deg) scale(1.03);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 130%) rotate(-38deg) scale(0.9);
+  }
+}
+
+@keyframes kariEatEyes {
+  0%,
+  100% {
+    transform: translateX(0) scaleY(1);
+  }
+
+  16%,
+  86% {
+    transform: translateX(0) scaleY(0.94);
+  }
+
+  30%,
+  76% {
+    transform: translateX(0) scaleY(1);
+  }
+}
+
+@keyframes kariEatEye {
+  0%,
+  100% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px) scale(1);
+  }
+
+  20%,
+  74% {
+    width: clamp(116px, calc(21 * var(--face-unit, 1vw)), 232px);
+    height: clamp(106px, calc(19 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-22px) scale(0.96);
+  }
+
+  42%,
+  56% {
+    width: clamp(124px, calc(23 * var(--face-unit, 1vw)), 248px);
+    height: clamp(102px, calc(18 * var(--face-unit, 1vw)), 204px);
+    transform: translateY(-16px) scale(1.02);
+  }
+}
+
+@keyframes kariBurgerBiteMove {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translate(-50%, 120%) scale(0.86);
+  }
+
+  24% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  36% {
+    opacity: 1;
+    transform: translate(-50%, -6px) scale(1.02);
+  }
+
+  46% {
+    opacity: 1;
+    transform: translate(-50%, -12px) scale(1.04);
+  }
+
+  56%,
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -4px) scale(0.96);
+  }
+}
+
+@keyframes kariBurgerFinishMove {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -4px) scale(0.96);
+  }
+
+  24% {
+    opacity: 1;
+    transform: translate(-50%, -10px) scale(0.78);
+  }
+
+  48% {
+    opacity: 1;
+    transform: translate(-50%, -8px) scale(0.55);
+  }
+
+  72% {
+    opacity: 1;
+    transform: translate(-50%, -14px) scale(0.28);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -30px) scale(0.04);
+  }
+}
+
+@keyframes kariBiteAppear {
+  0%,
+  43% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+
+  49%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes kariChew {
+  0%,
+  18% {
+    opacity: 0;
+    transform: translate(-50%, 115px) scale(0.72);
+  }
+
+  24%,
+  40% {
+    opacity: 1;
+    transform: translate(-50%, 6px) scale(1);
+  }
+
+  48%,
+  56% {
+    opacity: 1;
+    transform: translate(-50%, 14px) scale(1);
+  }
+
+  64%,
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 2px) scale(0.9);
+  }
+}
+
+@keyframes kariFinishChew {
+  0%,
+  12% {
+    opacity: 1;
+    transform: translate(-50%, 2px) scale(0.9);
+  }
+
+  24%,
+  36% {
+    opacity: 1;
+    transform: translate(-50%, 12px) scale(1, 0.48);
+  }
+
+  46%,
+  58% {
+    opacity: 1;
+    transform: translate(-50%, 2px) scale(0.9, 0.58);
+  }
+
+  68%,
+  82% {
+    opacity: 1;
+    transform: translate(-50%, 12px) scale(0.92, 0.42);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -4px) scale(0.7);
+  }
+}
+
+@keyframes kariMouthLine {
+  0%,
+  42% {
+    left: 50%;
+    top: 54%;
+    width: 72%;
+    height: 72%;
+    border: clamp(5px, calc(0.6 * var(--face-unit, 1vw)), 8px) solid var(--eye-core);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  48%,
+  56% {
+    left: 50%;
+    top: 58%;
+    width: 72%;
+    height: 16%;
+    border: clamp(5px, calc(0.6 * var(--face-unit, 1vw)), 8px) solid var(--eye-core);
+    border-top: 0;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-radius: 0 0 999px 999px;
+    transform: translate(-50%, -50%);
+  }
+
+  64%,
+  100% {
+    left: 44%;
+    top: 42%;
+    width: 58%;
+    height: 34%;
+    border: clamp(5px, calc(0.6 * var(--face-unit, 1vw)), 8px) solid var(--eye-core);
+    border-top: 0;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-radius: 0 0 999px 999px;
+    transform: translate(-50%, -50%) rotate(8deg);
+  }
+}
+
+@keyframes kariMouthStem {
+  0%,
+  44% {
+    opacity: 0;
+    left: 66%;
+    top: 38%;
+    height: 44%;
+    transform: rotate(12deg) scaleY(0.4);
+  }
+
+  58%,
+  100% {
+    opacity: 1;
+    left: 66%;
+    top: 28%;
+    height: 54%;
+    transform: rotate(8deg) scaleY(1);
+  }
+}
+
+@keyframes kariFinishMouthLine {
+  0%,
+  42% {
+    left: 44%;
+    top: 42%;
+    width: 58%;
+    height: 34%;
+    border: clamp(5px, calc(0.6 * var(--face-unit, 1vw)), 8px) solid var(--eye-core);
+    border-top: 0;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-radius: 0 0 999px 999px;
+    transform: translate(-50%, -50%) rotate(8deg);
+  }
+
+  48%,
+  76% {
+    left: 50%;
+    top: 58%;
+    width: 72%;
+    height: 16%;
+    border: clamp(5px, calc(0.6 * var(--face-unit, 1vw)), 8px) solid var(--eye-core);
+    border-top: 0;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-radius: 0 0 999px 999px;
+    transform: translate(-50%, -50%);
+  }
+
+  100% {
+    left: 44%;
+    top: 42%;
+    width: 58%;
+    height: 34%;
+    border: clamp(5px, calc(0.6 * var(--face-unit, 1vw)), 8px) solid var(--eye-core);
+    border-top: 0;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-radius: 0 0 999px 999px;
+    transform: translate(-50%, -50%) rotate(8deg);
+  }
+}
+
+@keyframes kariFinishMouthStem {
+  0%,
+  42% {
+    opacity: 1;
+    left: 66%;
+    top: 28%;
+    height: 54%;
+    transform: rotate(8deg) scaleY(1);
+  }
+
+  48%,
+  76%,
+  100% {
+    opacity: 0;
+    left: 66%;
+    top: 38%;
+    height: 44%;
+    transform: rotate(12deg) scaleY(0.4);
+  }
+}
+
+@keyframes kariCrumbOne {
+  0%,
+  46% {
+    opacity: 0;
+    transform: translate(-20px, -10px) scale(0.4);
+  }
+
+  54% {
+    opacity: 1;
+    transform: translate(-48px, -28px) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-78px, 10px) scale(0.45);
+  }
+}
+
+@keyframes kariCrumbTwo {
+  0%,
+  48% {
+    opacity: 0;
+    transform: translate(18px, -8px) scale(0.4);
+  }
+
+  56% {
+    opacity: 1;
+    transform: translate(52px, -24px) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(82px, 14px) scale(0.45);
+  }
+}
+
+@keyframes kariDrinkEyesIn {
+  0% {
+    transform: translateX(var(--look-x)) scaleY(var(--look-scale-y));
+  }
+
+  100% {
+    transform: translateX(0) scaleY(0.96);
+  }
+}
+
+@keyframes kariDrinkEyeIn {
+  0% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px);
+  }
+
+  100% {
+    width: clamp(126px, calc(23 * var(--face-unit, 1vw)), 265px);
+    height: clamp(70px, calc(9.4 * var(--face-unit, 1vw)), 136px);
+    transform: translateY(-70px);
+  }
+}
+
+@keyframes kariDrinkEyeShapeIn {
+  0% {
+    border-radius: 50%;
+  }
+
+  100% {
+    border-radius: 999px 999px 30px 30px / 100% 100% 24px 24px;
+  }
+}
+
+@keyframes kariDrinkCanIn {
+  0%,
+  15% {
+    opacity: 0;
+    transform: translate(-50%, 130%) rotate(-13deg) scale(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -18px) rotate(-13deg) scale(1);
+  }
+}
+
+@keyframes kariDrinkStrawIn {
+  0%,
+  25% {
+    opacity: 0;
+    transform: translate(-50%, 100px) rotate(-13deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -18px) rotate(-13deg);
+  }
+}
+
+@keyframes kariDrinkMouthIn {
+  0%,
+  35% {
+    opacity: 0;
+    transform: translate(-50%, 22px) scale(0.7);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+@keyframes kariDrinkEyesOut {
+  0% {
+    transform: translateX(0) scaleY(0.96);
+  }
+
+  100% {
+    transform: translateX(0) scaleY(1);
+  }
+}
+
+@keyframes kariDrinkEyeOut {
+  0% {
+    width: clamp(126px, calc(23 * var(--face-unit, 1vw)), 265px);
+    height: clamp(70px, calc(9.4 * var(--face-unit, 1vw)), 136px);
+    transform: translateY(-70px);
+  }
+
+  100% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes kariDrinkEyeShapeOut {
+  0% {
+    border-radius: 999px 999px 30px 30px / 100% 100% 24px 24px;
+  }
+
+  100% {
+    border-radius: 50%;
+  }
+}
+
+@keyframes kariDrinkCanOut {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -18px) rotate(-13deg) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 115%) rotate(-13deg) scale(0.94);
+  }
+}
+
+@keyframes kariDrinkStrawOut {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -18px) rotate(-13deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 86px) rotate(-13deg);
+  }
+}
+
+@keyframes kariDrinkMouthOut {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 22px) scale(0.7);
+  }
+}
+
+@keyframes kariSipDotOne {
+  0%,
+  40% {
+    opacity: 0;
+    transform: translate(-22px, 10px) scale(0.4);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-42px, -10px) scale(1);
+  }
+
+  72%,
+  100% {
+    opacity: 0;
+    transform: translate(-60px, 12px) scale(0.45);
+  }
+}
+
+@keyframes kariSipDotTwo {
+  0%,
+  52% {
+    opacity: 0;
+    transform: translate(18px, 8px) scale(0.4);
+  }
+
+  62% {
+    opacity: 1;
+    transform: translate(34px, -8px) scale(0.9);
+  }
+
+  80%,
+  100% {
+    opacity: 0;
+    transform: translate(50px, 14px) scale(0.45);
+  }
+}
+
+@keyframes kariSipDotThree {
+  0%,
+  36% {
+    opacity: 0;
+    transform: translate(-6px, 4px) scale(0.35);
+  }
+
+  46% {
+    opacity: 0.95;
+    transform: translate(-22px, -18px) scale(0.75);
+  }
+
+  66%,
+  100% {
+    opacity: 0;
+    transform: translate(-34px, -4px) scale(0.35);
+  }
+}
+
+@keyframes kariSipDotFour {
+  0%,
+  58% {
+    opacity: 0;
+    transform: translate(2px, 6px) scale(0.3);
+  }
+
+  68% {
+    opacity: 0.9;
+    transform: translate(20px, -18px) scale(0.65);
+  }
+
+  84%,
+  100% {
+    opacity: 0;
+    transform: translate(34px, -2px) scale(0.3);
+  }
+}
+
+@keyframes kariCuriousEyes {
+  0%,
+  100% {
+    transform: translateX(0) scaleY(1);
+  }
+
+  24% {
+    transform: translateX(16px) scaleY(0.96);
+  }
+
+  54% {
+    transform: translateX(38px) scaleY(1.02);
+  }
+
+  78% {
+    transform: translateX(28px) scaleY(0.98);
+  }
+}
+
+@keyframes kariLeftCuriousEye {
+  0%,
+  100% {
+    transform: translateY(-10px) scale(1);
+  }
+
+  28%,
+  74% {
+    transform: translateY(-6px) scale(0.94);
+  }
+}
+
+@keyframes kariRightCuriousEye {
+  0%,
+  100% {
+    transform: translateY(-10px) scale(1);
+  }
+
+  28% {
+    transform: translateY(-14px) scale(1.03);
+  }
+
+  54%,
+  74% {
+    transform: translateY(-20px) scale(1.08);
+  }
+}
+
+@keyframes kariQuestionPop {
+  0%,
+  16% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(22px) rotate(-22deg) scale(0.35);
+  }
+
+  34% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(-4px) rotate(10deg) scale(1.08);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0) rotate(-8deg) scale(1);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(-8px) rotate(6deg) scale(1.03);
+  }
+
+  88%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-18px) rotate(14deg) scale(0.75);
+  }
+}
+
+@keyframes kariQuestionDotOne {
+  0%,
+  20%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.4);
+  }
+
+  36%,
+  74% {
+    opacity: 0.8;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes kariQuestionDotTwo {
+  0%,
+  26%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.4);
+  }
+
+  44%,
+  76% {
+    opacity: 0.75;
+    transform: translateY(0) scale(0.8);
+  }
+}
+
+@keyframes kariAngryShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  18% {
+    transform: translateX(-8px);
+  }
+
+  26% {
+    transform: translateX(8px);
+  }
+
+  34% {
+    transform: translateX(-5px);
+  }
+
+  44%,
+  78% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes kariLeftAngryEye {
+  0%,
+  100% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px) rotate(0deg);
+  }
+
+  28%,
+  82% {
+    width: clamp(132px, calc(19 * var(--face-unit, 1vw)), 220px);
+    height: clamp(96px, calc(14.5 * var(--face-unit, 1vw)), 180px);
+    transform: translateY(-4px) rotate(0deg);
+  }
+}
+
+@keyframes kariRightAngryEye {
+  0%,
+  100% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px) rotate(0deg);
+  }
+
+  28%,
+  82% {
+    width: clamp(132px, calc(19 * var(--face-unit, 1vw)), 220px);
+    height: clamp(96px, calc(14.5 * var(--face-unit, 1vw)), 180px);
+    transform: translateY(-4px) rotate(0deg);
+  }
+}
+
+@keyframes kariLeftAngryLid {
+  0%,
+  100% {
+    transform: translateY(-120%) rotate(0deg);
+  }
+
+  28%,
+  82% {
+    transform: translateY(-22%) translateX(2%) rotate(15deg);
+  }
+}
+
+@keyframes kariRightAngryLid {
+  0%,
+  100% {
+    transform: translateY(-120%) rotate(0deg);
+  }
+
+  28%,
+  82% {
+    transform: translateY(-22%) translateX(-2%) rotate(-15deg);
+  }
+}
+
+@keyframes kariAngrySparkPop {
+  0%,
+  18% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.3);
+  }
+
+  32% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(16deg) scale(1.22);
+  }
+
+  46% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-8deg) scale(1);
+  }
+
+  62%,
+  78% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(12deg) scale(1.08);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-14px) rotate(22deg) scale(0.78);
+  }
+}
+
+@keyframes kariLoveEyesMove {
+  0%,
+  100% {
+    transform: translateX(0) scaleY(1);
+  }
+
+  18% {
+    transform: translateX(10px) scaleY(0.94);
+  }
+
+  36%,
+  78% {
+    transform: translateX(18px) scaleY(1);
+  }
+}
+
+@keyframes kariLoveEyeBounce {
+  0%,
+  100% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px) scale(1);
+  }
+
+  22%,
+  82% {
+    width: clamp(136px, calc(19 * var(--face-unit, 1vw)), 220px);
+    height: clamp(92px, calc(13 * var(--face-unit, 1vw)), 160px);
+    transform: translateY(-4px) scale(0.96);
+  }
+
+  42%,
+  58% {
+    transform: translateY(-10px) scale(1.03);
+  }
+}
+
+@keyframes kariLoveLid {
+  0%,
+  100% {
+    transform: translateY(125%);
+  }
+
+  22%,
+  82% {
+    transform: translateY(18%);
+  }
+}
+
+@keyframes kariHeartFloatOne {
+  0%,
+  18% {
+    opacity: 0;
+    transform: translateY(16px) rotate(-45deg) scale(0.3);
+  }
+
+  34% {
+    opacity: 1;
+    transform: translateY(0) rotate(-45deg) scale(1);
+  }
+
+  72% {
+    opacity: 1;
+    transform: translateY(-18px) rotate(-45deg) scale(0.95);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-44px) rotate(-45deg) scale(0.55);
+  }
+}
+
+@keyframes kariHeartFloatTwo {
+  0%,
+  28% {
+    opacity: 0;
+    transform: translateY(14px) rotate(-45deg) scale(0.25);
+  }
+
+  44% {
+    opacity: 1;
+    transform: translateY(0) rotate(-45deg) scale(1);
+  }
+
+  80% {
+    opacity: 0.85;
+    transform: translateY(-24px) rotate(-45deg) scale(0.85);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-48px) rotate(-45deg) scale(0.45);
+  }
+}
+
+@keyframes kariHeartFloatThree {
+  0%,
+  36% {
+    opacity: 0;
+    transform: translateY(10px) rotate(-45deg) scale(0.25);
+  }
+
+  52% {
+    opacity: 0.9;
+    transform: translateY(0) rotate(-45deg) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-38px) rotate(-45deg) scale(0.4);
+  }
+}
+
+@keyframes kariHeartFloatFour {
+  0%,
+  46% {
+    opacity: 0;
+    transform: translateY(10px) rotate(-45deg) scale(0.2);
+  }
+
+  60% {
+    opacity: 0.8;
+    transform: translateY(0) rotate(-45deg) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) rotate(-45deg) scale(0.35);
+  }
+}
+
+@keyframes kariShockEyesMove {
+  0%,
+  100% {
+    transform: translateX(0) scaleY(1);
+  }
+
+  14% {
+    transform: translateX(-10px) scaleY(1.05);
+  }
+
+  24% {
+    transform: translateX(10px) scaleY(0.96);
+  }
+
+  36%,
+  78% {
+    transform: translateX(0) scaleY(1);
+  }
+}
+
+@keyframes kariShockEyePulse {
+  0%,
+  100% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px) scale(1);
+  }
+
+  18% {
+    width: clamp(142px, calc(20 * var(--face-unit, 1vw)), 230px);
+    height: clamp(118px, calc(17 * var(--face-unit, 1vw)), 205px);
+    transform: translateY(-16px) scale(1.08);
+  }
+
+  34%,
+  76% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px) scale(1);
+  }
+}
+
+@keyframes kariExclaimPop {
+  0%,
+  16% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(16px) rotate(18deg) scale(0.25);
+  }
+
+  28% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(-6px) rotate(-10deg) scale(1.18);
+  }
+
+  42% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0) rotate(12deg) scale(0.96);
+  }
+
+  62%,
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(-4px) rotate(8deg) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-18px) rotate(20deg) scale(0.72);
+  }
+}
+
+@keyframes kariExclaimBarWiggle {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(9deg);
+  }
+
+  28% {
+    transform: translateX(-50%) rotate(-8deg);
+  }
+
+  42% {
+    transform: translateX(-50%) rotate(14deg);
+  }
+
+  62% {
+    transform: translateX(-50%) rotate(5deg);
+  }
+}
+
+@keyframes kariExclaimDotPop {
+  0%,
+  20% {
+    transform: translateX(-50%) scale(0.4);
+  }
+
+  30% {
+    transform: translateX(-50%) scale(1.25);
+  }
+
+  42%,
+  80% {
+    transform: translateX(-50%) scale(1);
+  }
+
+  100% {
+    transform: translateX(-50%) scale(0.55);
+  }
+}
+
+@keyframes kariTellEyesOpen {
+  0% {
+    transform: translateX(0) scaleY(1);
+  }
+
+  40% {
+    transform: translateX(-10px) scaleY(0.98);
+  }
+
+  100% {
+    transform: translateX(0) scaleY(1);
+  }
+}
+
+@keyframes kariTellEyeOpen {
+  0% {
+    transform: translateY(-18px) scale(1);
+  }
+
+  100% {
+    transform: translateY(-14px) scale(0.96);
+  }
+}
+
+@keyframes kariTellMouthOpen {
+  0%,
+  35% {
+    opacity: 0;
+    transform: translate(-50%, 10px) scale(0.7);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.12, 1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1, 0.55);
+  }
+}
+
+@keyframes kariTellMouthLoop {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1, 0.55);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.12, 1);
+  }
+}
+
+@keyframes kariTellMouthFinish {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1, 0.55);
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.05, 0.65);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 10px) scale(0.7);
+  }
+}
+
+@keyframes kariTellEyesFinish {
+  0%,
+  100% {
+    transform: translateX(0) scaleY(1);
+  }
+}
+
+@keyframes kariTellEyeFinish {
+  0% {
+    transform: translateY(-14px) scale(0.96);
+  }
+
+  100% {
+    transform: translateY(-18px) scale(1);
+  }
+}
+
+@keyframes kariTellLeftMicOpen {
+  0% {
+    opacity: 0;
+    transform: translate(-120px, 180px) rotate(24deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(24deg);
+  }
+}
+
+@keyframes kariTellRightMicOpen {
+  0% {
+    opacity: 0;
+    transform: translate(120px, 180px) rotate(-24deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(-24deg);
+  }
+}
+
+@keyframes kariTellLeftMicFinish {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(24deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-90px, 150px) rotate(24deg);
+  }
+}
+
+@keyframes kariTellRightMicFinish {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(-24deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(90px, 150px) rotate(-24deg);
+  }
+}
+
+@keyframes kariTellSparkOne {
+  0%,
+  36%,
+  54%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4) rotate(0);
+  }
+
+  44% {
+    opacity: 1;
+    transform: scale(1.15) rotate(20deg);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(0.85) rotate(-12deg);
+  }
+}
+
+@keyframes kariTellSparkTwo {
+  0%,
+  50%,
+  68%,
+  100% {
+    opacity: 0;
+    transform: scale(0.35) rotate(0);
+  }
+
+  56% {
+    opacity: 1;
+    transform: scale(1) rotate(-18deg);
+  }
+
+  62% {
+    opacity: 0.75;
+    transform: scale(0.8) rotate(12deg);
+  }
+}
+
+@keyframes kariTellSparkThree {
+  0%,
+  28%,
+  42%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0);
+  }
+
+  34% {
+    opacity: 0.9;
+    transform: scale(1) rotate(18deg);
+  }
+}
+
+@keyframes kariKissEyesMove {
+  0%,
+  100% {
+    transform: translateX(0) scaleY(1);
+  }
+
+  24%,
+  72% {
+    transform: translateX(-26px) scaleY(0.98);
+  }
+}
+
+@keyframes kariKissEye {
+  0%,
+  100% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-18px) scale(1);
+  }
+
+  26%,
+  76% {
+    width: clamp(136px, calc(19 * var(--face-unit, 1vw)), 220px);
+    height: clamp(92px, calc(13 * var(--face-unit, 1vw)), 160px);
+    transform: translateY(-8px) scale(0.96);
+  }
+}
+
+@keyframes kariKissLid {
+  0%,
+  100% {
+    transform: translateY(125%);
+  }
+
+  26%,
+  76% {
+    transform: translateY(14%);
+  }
+}
+
+@keyframes kariKissMouth {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translate(-50%, 18px) scale(0.3) rotate(-8deg);
+  }
+
+  22% {
+    opacity: 1;
+    transform: translate(-50%, 2px) scale(1.15, 0.9) rotate(0deg);
+  }
+
+  34% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(0.82, 1.08) rotate(0deg);
+  }
+
+  46% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(0.92) rotate(0deg);
+  }
+
+  64%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -8px) scale(0.25) rotate(8deg);
+  }
+}
+
+@keyframes kariBigKissHeart {
+  0%,
+  38% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-45deg) scale(0.25);
+  }
+
+  48% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-45deg) scale(1);
+  }
+
+  72% {
+    opacity: 0.65;
+    transform: translate(-50%, -50%) rotate(-45deg) scale(10);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-45deg) scale(34);
+  }
+}
+
+@keyframes kariPictureEyesMove {
+  0%,
+  12% {
+    transform: translateX(var(--look-x)) scaleY(var(--look-scale-y));
+  }
+
+  24%,
+  48% {
+    transform: translateX(-60px) scaleY(0.98);
+  }
+
+  58%,
+  72% {
+    transform: translateX(-85px) scaleY(0.9);
+  }
+
+  100% {
+    transform: translateX(var(--look-x)) scaleY(var(--look-scale-y));
+  }
+}
+
+@keyframes kariPictureLeftEye {
+  0%,
+  30%,
+  100% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px) rotate(0deg);
+  }
+
+  58%,
+  72% {
+    width: clamp(118px, calc(22 * var(--face-unit, 1vw)), 230px);
+    height: clamp(34px, calc(5 * var(--face-unit, 1vw)), 62px);
+    transform: translateY(-25px) rotate(10deg);
+  }
+}
+
+@keyframes kariPictureRightEye {
+  0%,
+  30%,
+  100% {
+    width: clamp(126px, calc(25 * var(--face-unit, 1vw)), 258px);
+    height: clamp(104px, calc(20 * var(--face-unit, 1vw)), 214px);
+    transform: translateY(-10px) rotate(0deg);
+  }
+
+  58%,
+  72% {
+    width: clamp(120px, calc(22 * var(--face-unit, 1vw)), 232px);
+    height: clamp(88px, calc(16 * var(--face-unit, 1vw)), 180px);
+    transform: translateY(-10px) rotate(0deg);
+  }
+}
+
+@keyframes kariCameraPop {
+  0%,
+  16% {
+    opacity: 0;
+    transform: translate(-50%, 140%) scale(0.9);
+  }
+
+  28%,
+  72% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  86%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 40%) scale(0.95);
+  }
+}
+
+@keyframes kariPhotoFlash {
+  0%,
+  64% {
+    opacity: 0;
+  }
+
+  66% {
+    opacity: 1;
+  }
+
+  73%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes kariScanBlink {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(0.2);
+  }
+
+  42%,
+  58% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+
+  72% {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scaleX(0.8);
+  }
+}
+
+@keyframes kariSpeakingGlow {
+  from {
+    filter: blur(5px);
+    transform: translate(calc(var(--glow-dir) * 18px), 24px) scale(1);
+  }
+
+  to {
+    filter: blur(7px);
+    transform: translate(calc(var(--glow-dir) * 18px), 24px) scale(1.035);
+  }
+}
+
+@media (max-width: 700px) {
+  .kari-eyes {
+    gap: clamp(42px, calc(12 * var(--face-unit, 1vw)), 90px);
+  }
+
+  .kari-eye {
+    width: clamp(108px, calc(34 * var(--face-unit, 1vw)), 180px);
+    height: clamp(88px, calc(28 * var(--face-unit, 1vw)), 150px);
+  }
+}
+
+
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050608;color-scheme:dark}body{--face-unit:1vw}@supports(width:1cqw){body{container-type:size;--face-unit:min(1cqw,1.7cqh)}}#faceCanvas{width:100%;height:100%;border:0;border-radius:0;background:#050608}*{box-sizing:border-box}

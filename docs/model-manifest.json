@@ -1,0 +1,8 @@
+{
+  "file": "efficientdet_lite0.tflite",
+  "sha256": "0720bf247bd76e6594ea28fa9c6f7c5242be774818997dbbeffc4da460c723bb",
+  "source": "https://storage.googleapis.com/mediapipe-models/object_detector/efficientdet_lite0/int8/1/efficientdet_lite0.tflite",
+  "license": "Apache-2.0",
+  "sameAsAndroid": true,
+  "mediapipeRevision": "e9794ef55e2509c09aa8b6ba1764b797db8eb200"
+}

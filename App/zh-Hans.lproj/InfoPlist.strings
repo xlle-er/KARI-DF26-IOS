@@ -1,0 +1,6 @@
+"NSBluetoothAlwaysUsageDescription" = "KARI 通过蓝牙连接附近的机器人身体。";
+"NSCameraUsageDescription" = "KARI 使用摄像头理解你主动分享的画面。";
+"NSLocalNetworkUsageDescription" = "KARI 通过 Wi-Fi 发现并控制机器人，也可连接你配置的局域网模型服务。";
+"NSMicrophoneUsageDescription" = "KARI 使用麦克风进行实时对话。";
+
+"NSSpeechRecognitionUsageDescription" = "KARI 使用本机语音识别检测唤醒短语，等待期间不上传声音。";

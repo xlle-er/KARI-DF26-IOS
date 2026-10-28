@@ -1,0 +1,703 @@
+"AI 服务" = "AI services";
+"提供商" = "Provider";
+"交互方式" = "Interaction mode";
+"实时语音与视觉" = "Live voice and vision";
+"文字与视觉" = "Text and vision";
+"实时模型" = "Live model";
+"文字 / 视觉模型" = "Text / vision model";
+"Google Cloud 项目" = "Google Cloud project";
+"认证" = "Authentication";
+"个人 Cloud Key" = "Personal Cloud Key";
+"Google 授权" = "Google sign-in";
+"端点" = "Endpoint";
+"标准项目" = "Standard project";
+"Express（文字）" = "Express (text)";
+"项目 ID" = "Project ID";
+"区域" = "Region";
+"服务地址" = "Service URL";
+"HTTPS 或局域网服务地址" = "HTTPS or local network URL";
+"凭据" = "Credentials";
+"凭据存入 iOS 钥匙串。留空会保留已有密钥。" = "Credentials are stored in the iOS Keychain. Leave blank to keep the saved key.";
+"删除此提供商的密钥" = "Delete this provider’s key";
+"保存配置" = "Save configuration";
+"保存并测试 AI" = "Save and test AI";
+"应用与权限" = "App and permissions";
+"打开系统权限设置" = "Open system permissions";
+"SwiftUI 原生界面 · 原生音视频 · 原生蓝牙" = "Native SwiftUI · Native audio and video · Native Bluetooth";
+"实时模型用于语音通话；文字模型用于文字与视觉。下拉项是便捷预设，也可以直接输入自定义模型。Ollama 模型需先在电脑上安装。" = "Live models support voice conversations; text models support text and vision. Choose a preset or enter a custom model. Install Ollama models on your computer first.";
+"文字交流默认不附带画面。需要分享图片时，请选择支持视觉的模型，例如 qwen-vl-plus 或 gemma3:4b，再点击输入框旁的图片按钮。" = "Text messages do not include images by default. To share an image, select a vision model such as qwen-vl-plus or gemma3:4b, then tap the image button.";
+"AI 与设置" = "AI and settings";
+"完成" = "Done";
+"请选择或输入模型名称" = "Select or enter a model name";
+"Express 请选择文字模式和个人 Cloud Key" = "For Express, select text mode and Personal Cloud Key";
+"配置已保存" = "Configuration saved";
+"Google 授权完成" = "Google sign-in completed";
+"密钥已删除" = "Key deleted";
+"%@（默认）" = "%@ (default)";
+"选择模型" = "Choose model";
+"输入或选择模型名称" = "Enter or choose a model";
+"语言" = "Language";
+"界面语言" = "App language";
+"跟随系统" = "System default";
+"AI 会优先使用你输入或说话的语言；界面语言只作为没有语言线索时的默认值。" = "AI follows the language you type or speak. The app language is only a fallback when no language is clear.";
+"通义千问 / 百炼" = "Qwen / Model Studio";
+"Ollama 本地模型" = "Ollama local models";
+"自定义兼容服务" = "Custom compatible service";
+"离线陪伴" = "Offline companion";
+"模拟演示" = "Demo";
+"无法读取安全凭据，请解锁手机后重试" = "Unable to read credentials. Unlock your phone and try again.";
+"无法保存安全凭据" = "Unable to save credentials";
+"无法更新安全凭据" = "Unable to update credentials";
+"无法删除凭据" = "Unable to delete credentials";
+"身体动作未开启" = "Body movement is not enabled";
+"动作参数无效" = "Invalid movement parameters";
+"不支持的身体指令" = "Unsupported body command";
+"机器人消息过长" = "Robot message is too large";
+"模型、项目或区域名称无效" = "Invalid model, project or region name";
+"请填写有效的模型服务地址" = "Enter a valid model service URL";
+"公网模型服务必须使用 HTTPS" = "Public model services must use HTTPS";
+"检查模型、权限、配额和网络后重试" = "Check the model, permissions, quota and network, then try again.";
+"AI 请求失败（%@）：%@" = "AI request failed (%@): %@";
+"模型未返回有效内容，请确认模型支持当前输入" = "The model returned no content. Check that it supports this input.";
+"[已隐藏]" = "[redacted]";
+"Bearer [已隐藏]" = "Bearer [redacted]";
+"请将手机横放以显示眼睛；轻点屏幕可退出陪伴。" = "Rotate your phone to landscape to see the eyes. Tap to reveal Exit companion.";
+"请将手机竖放以查看设置。" = "Rotate your phone to portrait to view settings.";
+"陪伴画面，轻点显示退出按钮" = "Companion screen. Tap to show the exit button.";
+"退出陪伴" = "Exit companion";
+"摄像头实时预览" = "Live camera preview";
+"陪伴设置" = "Companion setup";
+"准备好后开始陪伴，手机将横屏展示眼睛。" = "When you are ready, start companionship to display the eyes in landscape.";
+"我的机器人" = "My robot";
+"正在回应" = "Responding";
+"我在听，也在看" = "Listening and watching";
+"我在听" = "Listening";
+"正在连接 AI…" = "Connecting to AI…";
+"就在这里，陪着你" = "Right here with you";
+"AI 在线" = "AI online";
+"关闭相机" = "Turn camera off";
+"开启相机" = "Turn camera on";
+"切换镜头" = "Switch camera";
+"测试声音" = "Test sound";
+"恢复采集" = "Restore capture";
+"动作测试" = "Test movement";
+"AI 测试" = "Test AI";
+"取消附加画面" = "Remove attached image";
+"附加画面，需要视觉模型" = "Attach image; requires a vision model";
+"和 KARI 说点什么…" = "Say something to KARI…";
+"发送消息" = "Send message";
+"正在结束…" = "Ending…";
+"取消测试" = "Cancel test";
+"取消连接" = "Cancel connection";
+"开始陪伴" = "Start companion";
+"摄像头暂时被系统占用，可稍后恢复采集" = "The camera is temporarily in use. Try restoring capture shortly.";
+"摄像头发生中断，请恢复采集" = "The camera was interrupted. Restore capture to continue.";
+"请在 iPhone 设置中允许 KARI 使用摄像头" = "Allow KARI to use the camera in iPhone Settings.";
+"找不到摄像头" = "No camera was found";
+"无法建立摄像头采集" = "Unable to start camera capture";
+"系统暂时中断了音频" = "Audio was temporarily interrupted by the system";
+"麦克风被系统暂时中断，可点击恢复采集。" = "The microphone was interrupted. Tap Restore capture to continue.";
+"音频正被系统中断，请稍后恢复采集" = "Audio is interrupted by the system. Try restoring capture shortly.";
+"正在切换到语音采集" = "Switching to voice capture";
+"麦克风格式不可用，请检查音频设备后恢复采集" = "The microphone format is unavailable. Check the audio device and restore capture.";
+"音频设备发生变化，正在恢复采集…" = "Audio device changed. Restoring capture…";
+"采集恢复失败：%@。请点击恢复采集。" = "Capture recovery failed: %@. Tap Restore capture.";
+"收到的语音数据格式不正确" = "Received audio has an invalid format";
+"语音缓冲异常积压，本轮回复已暂停，请重试或点击恢复采集" = "Audio buffering stalled. This reply was paused. Try again or tap Restore capture.";
+"无法缓冲语音" = "Unable to buffer audio";
+"无法创建语音播放缓冲区" = "Unable to create an audio playback buffer";
+"音频设备未能恢复播放，请检查输出设备后点击恢复采集" = "Unable to restore playback. Check your output device and tap Restore capture.";
+"播放恢复失败：%@" = "Playback recovery failed: %@";
+"播放已停止" = "Playback stopped";
+"信号很强" = "Very strong signal";
+"信号良好" = "Good signal";
+"信号较弱" = "Weak signal";
+"选择自己的机器人后连接" = "Choose your robot to connect";
+"未连接身体" = "No robot connected";
+"正在搜索附近的 KARI…" = "Searching for nearby KARI robots…";
+"正在连接 %@…" = "Connecting to %@…";
+"连接超时，请检查机器人电源或是否已被其他手机连接" = "Connection timed out. Check the robot’s power and whether another phone is connected.";
+"身体已断开" = "Robot disconnected";
+"请先连接自己的机器人" = "Connect your robot first";
+"动作队列繁忙，请稍后重试" = "The movement queue is busy. Try again shortly.";
+"动作已取消" = "Movement cancelled";
+"蓝牙写入超时，请重新连接身体" = "Bluetooth write timed out. Reconnect your robot.";
+"身体指令未确认，已暂停动作" = "Robot command was not confirmed. Movement is paused.";
+"机器人写入长度无效" = "Invalid robot write size";
+"请在系统设置中允许 KARI 使用蓝牙" = "Allow KARI to use Bluetooth in system Settings.";
+"蓝牙未开启，请在系统设置中打开" = "Bluetooth is off. Turn it on in system Settings.";
+"此设备不支持蓝牙低功耗连接" = "This device does not support Bluetooth Low Energy";
+"蓝牙正在准备，请稍候" = "Bluetooth is getting ready. Please wait.";
+"蓝牙不可用" = "Bluetooth unavailable";
+"连接失败" = "Connection failed";
+"连接失败，请确认机器人未被其他手机占用" = "Connection failed. Check that another phone is not using the robot.";
+"身体连接已断开" = "Robot connection lost";
+"身体连接已断开，语音陪伴可继续" = "Robot connection lost. Voice companionship can continue.";
+"机器人服务不可用" = "Robot service unavailable";
+"机器人指令服务不完整" = "Robot command service is incomplete";
+"无法接收机器人确认消息" = "Unable to receive robot confirmations";
+"已连接 %@" = "Connected to %@";
+"机器人拒绝指令" = "Robot rejected the command";
+"请先开启摄像头并等待画面" = "Turn on the camera and wait for a frame first.";
+"陪伴尚未开始" = "Companionship has not started";
+"；语音可继续" = "; voice can continue";
+"身体动作已停止，语音陪伴可继续。" = "Body movement stopped. Voice companionship can continue.";
+"停止指令未获确认，请检查机器人。" = "Stop was not confirmed. Check your robot.";
+"正在开始陪伴…" = "Starting companionship…";
+"摄像头未开启，语音仍可继续。%@" = "Camera unavailable; voice can continue. %@";
+"可以直接说话，我在听。" = "You can speak now. I’m listening.";
+"陪伴已开始，可使用下方文字交流。" = "Companionship started. Use the text field to chat.";
+"陪伴已结束，麦克风和摄像头已关闭。" = "Companionship ended. Microphone and camera are off.";
+"采集已关闭；身体停止未获确认，请检查机器人。" = "Capture is off, but the robot did not confirm stopping. Check your robot.";
+"采集已恢复，可以继续对话。" = "Capture restored. You can continue chatting.";
+"提示音已输出，请确认手机媒体音量。" = "Test tone played. Check your phone’s media volume.";
+"身体停止未获确认" = "Robot stop was not confirmed";
+"请先连接自己的机器人，再结束陪伴进行测试" = "Connect your robot and end companionship before testing.";
+"正在测试轻微左右转动，请留出空间。" = "Testing a small left and right turn. Leave some space.";
+"动作测试完成，身体已确认指令。" = "Movement test completed. The robot confirmed the commands.";
+"正在测试 AI…" = "Testing AI…";
+"AI 测试未完成语音播放，请检查网络和模型" = "AI audio test did not finish. Check the network and model.";
+"AI 测试成功，语音已收到并播放。" = "AI test succeeded. Audio was received and played.";
+"离线陪伴已就绪。" = "Offline companionship is ready.";
+"AI 文本测试成功。" = "AI text test succeeded.";
+"眼睛资源缺失，请重新构建 App" = "Eye resources are missing. Rebuild the app.";
+"眼睛和动作组件正在准备，请稍后重试" = "Eyes and movement are getting ready. Try again shortly.";
+"动作未全部完成，请检查身体连接" = "Some movements did not finish. Check the robot connection.";
+"不支持的组件请求" = "Unsupported component request";
+"眼睛组件加载失败：%@" = "Unable to load the eyes: %@";
+"请先配置 iOS Google OAuth 客户端 ID" = "Configure your iOS Google OAuth client ID first.";
+"请先完成 Google 授权" = "Sign in with Google first.";
+"请在 AI 设置中填写 API Key" = "Enter an API Key in AI settings.";
+"Express 端点不支持当前实时路径，请选择标准项目" = "The Express endpoint does not support this Live connection. Select a standard project.";
+"实时连接中断：%@" = "Live connection interrupted: %@";
+"实时配置资源缺失，请重新构建" = "Live configuration is missing. Rebuild the app.";
+"实时会话准备超时，请检查网络与模型" = "Live session setup timed out. Check the network and model.";
+"请在 iPhone 设置中允许 KARI 使用麦克风" = "Allow KARI to use the microphone in iPhone Settings.";
+"网络发送过慢，请检查网络后恢复连接" = "Network sending is too slow. Check the network and restore the connection.";
+"实时发送失败：%@" = "Live send failed: %@";
+"AI 拒绝请求" = "AI rejected the request";
+"未知动作请求" = "Unknown movement request";
+"停止搜索" = "Stop scanning";
+"搜索附近机器人" = "Find nearby robots";
+"附近的机器人" = "Nearby robots";
+"正在寻找小伙伴…" = "Looking for a companion…";
+"尚未发现机器人，请确认身体已开机" = "No robots found yet. Check that yours is powered on.";
+"确认我的机器人" = "Identify my robot";
+"断开当前机器人" = "Disconnect robot";
+"允许陪伴时的身体动作" = "Allow body movement during companionship";
+"上次连接" = "Last connected";
+"添加 / 修改本机备注" = "Add / edit local alias";
+"设为我的机器人" = "Mark as my robot";
+"设备备注" = "Device alias";
+"编号 %@" = "ID %@";
+"已连接" = "Connected";
+"正在连接…" = "Connecting…";
+"连接此机器人" = "Connect to this robot";
+"设备编号 %@" = "Device ID %@";
+"例如：小乐的 KARI" = "For example: My desk KARI";
+"备注只保存在这台手机，不会修改机器人固件或其他伙伴手机中的名称。" = "The alias stays on this phone. It does not change the firmware or names on other phones.";
+"机器人备注" = "Robot alias";
+"取消" = "Cancel";
+"保存" = "Save";
+"%@ · %@ dBm" = "%@ · %@ dBm";
+"%@ · %@" = "%@ · %@";
+"遥控器" = "Remote control";
+"关闭遥控" = "Close remote";
+"操作方式" = "Control mode";
+"摇杆" = "Joystick";
+"方向键" = "Direction pad";
+"停止" = "Stop";
+"速度" = "Speed";
+"重试" = "Retry";
+"前进" = "Forward";
+"后退" = "Reverse";
+"左转" = "Turn left";
+"右转" = "Turn right";
+"摇杆，拖动控制方向，松手停止" = "Joystick. Drag to steer; release to stop.";
+"按住操作，松手停止" = "Hold to drive; release to stop.";
+"遥控连接已中断，请重新连接机器人后重试" = "Remote connection lost. Reconnect your robot and try again.";
+"正在确认机器人停止…" = "Confirming the robot has stopped…";
+"停止未获确认，请检查连接后重试" = "Stop was not confirmed. Check the connection and retry.";
+"遥控指令未获确认，已停止续发，请检查机器人" = "Remote command was not confirmed. Sending stopped. Check your robot.";
+"手动控制期间暂停 AI 身体动作" = "AI body movement is paused during manual control.";
+"手动遥控中，AI 身体动作已暂停" = "Manual remote is active. AI body movement is paused.";
+"手动遥控已停止" = "Manual movement stopped.";
+"蓝牙指令超时，已断开连接，请重新连接机器人" = "Bluetooth command timed out. Disconnected; reconnect your robot.";
+"设备管理" = "Device management";
+"Wi-Fi 连接" = "Connect Wi-Fi";
+"连接 ESP 热点或同一局域网；也可通过 BLE 配网。" = "Join the ESP hotspot or the same LAN. BLE provisioning is also available.";
+"设备 IP" = "Device IP";
+"设备管理密码" = "Device password";
+"发现局域网设备" = "Discover LAN devices";
+"读取设备状态" = "Refresh device status";
+"设备配网" = "Wi-Fi setup";
+"Wi-Fi 名称" = "Wi-Fi name";
+"Wi-Fi 密码" = "Wi-Fi password";
+"扫描 Wi-Fi" = "Scan Wi-Fi";
+"保存并连接" = "Save and connect";
+"忘记网络" = "Forget network";
+"电机方向" = "Motor direction";
+"先架空车轮。保存会先停车，点动最多 300 毫秒。" = "Lift the wheels first. Saving stops the motors. Each test lasts at most 300 ms.";
+"左轮反向" = "Invert left motor";
+"右轮反向" = "Invert right motor";
+"交换左右轮" = "Swap motor sides";
+"保存方向" = "Save direction";
+"前后反了" = "Reverse forward/back";
+"左右转向反了" = "Reverse steering";
+"恢复默认方向" = "Reset direction";
+"点动测试" = "Motor tests";
+"立即停止" = "Stop now";
+"固件升级" = "Firmware update";
+"上传需要 Wi-Fi 连接。保持供电，升级后重连核对版本。" = "Uploads require Wi-Fi. Keep power connected, then reconnect and verify the version.";
+"选择本地 .bin" = "Choose local .bin";
+"检查在线版本" = "Check for updates";
+"安装在线版本" = "Install online release";
+"退出升级模式" = "Exit update mode";
+"左轮正转" = "Left motor forward";
+"左轮反转" = "Left motor reverse";
+"右轮正转" = "Right motor forward";
+"右轮反转" = "Right motor reverse";
+"编号是此 iPhone 识别设备的标识。信号强弱仅供参考；同名时请核对编号、添加本机备注，再连接并核对设备信息。不会自动连接信号最强的设备。" = "This number identifies the device on this iPhone. Check its ID and add a local note before connecting. KARI does not automatically choose the strongest signal.";
+"接管控制" = "Take control";
+
+// Offline firmware preparation and hotspot recovery
+"先联网下载并校验固件，再连接 ESP 热点上传。升级后断开热点，恢复流量或可上网的 Wi-Fi，再启动 AI 陪伴。" = "Download and verify while online, then join the ESP hotspot to upload. After updating, leave the hotspot and restore mobile data or internet Wi-Fi before starting AI companionship.";
+"初版仅热点 OTA 固件：先下载 .bin，再通过 192.168.4.1 设备面板上传；首次升级后手动断开热点。" = "Initial hotspot-only firmware: download the .bin first, upload it through the device panel at 192.168.4.1, then manually leave the hotspot after this first update.";
+"升级后关闭 ESP 热点" = "Close ESP hotspot after update";
+"需设备固件支持；关闭 ESP 热点后，手机是否自动恢复互联网由系统决定。长按 BOOT 3 秒可重新开启热点。" = "Requires device firmware support. Your phone decides whether internet reconnects automatically. Hold BOOT for 3 seconds to reopen the hotspot.";
+"先下载固件" = "Download firmware first";
+"上传已保存固件" = "Upload saved firmware";
+"已下载，可离线上传：" = "Ready offline: ";
+"正在下载并校验，请保持互联网连接" = "Downloading and verifying; stay online";
+"固件已保存，可以连接 ESP 热点后离线上传" = "Firmware saved. Join the ESP hotspot to upload offline";
+"升级成功，请断开 ESP 热点并恢复互联网，再使用 AI 陪伴；重连设备核对版本" = "Update accepted. Leave the ESP hotspot and restore internet before AI companionship; reconnect to verify the version";
+"请先在联网时下载固件，再连接 ESP 热点" = "Download firmware while online before joining the ESP hotspot";
+"固件缓存无效，请重新下载" = "Firmware cache invalid; download again";
+"当前设备固件不支持自动关闭，本次升级后请手动断开热点。" = "Current firmware requires manually leaving the hotspot after this update.";
+"预览版更新" = "Preview firmware updates";
+"预览通道的版本可能尚未完成硬件验证。关闭后使用稳定版本。" = "Preview releases may not have completed hardware testing. Turn off to use stable releases.";
+"预览版" = "Preview";
+"稳定版" = "Stable";
+"请先开启预览版更新" = "Enable preview updates first";
+
+"上传 bin 更新包" = "Upload bin package";
+"下载固件" = "Download firmware";
+"保留识别码" = "Keep device ID";
+"修改机器人名字" = "Change robot name";
+"修改管理密码" = "Change admin password";
+"先架空车轮，点动最多 300 毫秒。" = "Lift the wheels. Tests last at most 300 ms.";
+"关闭" = "Off";
+"升级固件后可修改名称和密码" = "Update firmware to change the name and password";
+"固件已下载" = "Firmware downloaded";
+"安装 OTA 更新" = "Install OTA update";
+"开启" = "On";
+"手动指定 IP（可选）" = "Manual IP override (optional)";
+"改用热点升级" = "Update via hotspot";
+"新管理密码" = "New admin password";
+"机器人名字（支持中文）" = "Robot name (Chinese supported)";
+"核对升级版本" = "Verify installed version";
+"稍后" = "Later";
+"管理设置" = "Management settings";
+"设备信息" = "Device information";
+"调试机器人" = "Debug robot";
+"进入升级模式" = "Enter update mode";
+"连接" = "Connect";
+"连接机器人" = "Connect robot";
+"连接热点" = "Connect hotspot";
+"配网" = "Wi-Fi setup";
+"重新输入管理密码" = "Re-enter admin password";
+"马达测试" = "Motor tests";
+"马达测试 · 配网 · OTA" = "Motors · Wi-Fi · OTA";
+"给机器人起个名字" = "Name your robot";
+
+
+
+
+"旧固件帮助" = "Legacy firmware help";
+
+"若无法开启热点，长按 BOOT 3 秒后连接，并通过设备网页上传固件。" = "If the hotspot cannot be opened, hold BOOT for 3 seconds, connect and upload using the device page.";
+"名字最多 24 个 UTF-8 字节" = "Name must fit 24 UTF-8 bytes";
+"密码需为 8–63 位可打印 ASCII 字符" = "Password must contain 8–63 printable ASCII characters";
+"名称已保存，请重新连接" = "Name saved. Reconnect the robot";
+"密码已保存，请重新连接" = "Password saved. Reconnect the robot";
+"设备身份不匹配" = "Device identity mismatch";
+"设备已就绪" = "Device ready";
+"正在检查版本…" = "Checking release…";
+"正在下载：%@%" = "Downloading: %@%%";
+"升级超时，请重试" = "Update timed out. Retry";
+"设备连接超时" = "Device connection timed out";
+"本地固件已就绪" = "Local firmware ready";
+"固件与设备板型不兼容" = "Firmware does not match the device board";
+"正在重启…" = "Restarting…";
+"升级完成" = "Update complete";
+"请重新连接并核对版本" = "Reconnect and verify the version";
+"局域网机器人" = "LAN robots";
+"搜索局域网" = "Find LAN robots";
+"请在系统 Wi-Fi 中连接：%@" = "Connect in system Wi-Fi settings: %@";
+"请在系统 Wi-Fi 连接该热点，再返回继续。" = "Join this hotspot in system Wi-Fi settings, then return to continue.";
+"已连接，继续" = "Connected, continue";
+"复制热点密码" = "Copy hotspot password";
+
+"请先输入设备管理密码" = "Enter the device admin password first";
+"升级模式中，运动已锁定，请先退出升级模式" = "Motion is locked in update mode. Exit update mode first";
+"电机接线尚未配置" = "Motor wiring has not been configured";
+"运动未获许可，请在调试页检查升级锁定与电机状态" = "Motion was refused. Check update mode and motor status in Debug robot";
+"机器人正由其他客户端控制" = "Another client is controlling the robot";
+"电机 PWM 初始化失败" = "Motor PWM initialization failed";
+"固件板型与设备 Flash/PSRAM 不匹配" = "Firmware board profile does not match device Flash/PSRAM";
+"电机接线配置无效" = "Motor wiring configuration is invalid";
+"升级模式中，运动已锁定" = "Motion is locked in update mode";
+"退出升级模式并恢复控制" = "Exit update mode and restore control";
+"电机未就绪" = "Motors not ready";
+"电机已就绪" = "Motors ready";
+"刷新设备状态" = "Refresh device status";
+"复制设备诊断" = "Copy device diagnostics";
+"已退出升级模式" = "Exited update mode";
+"输入管理密码" = "Enter admin password";
+
+"设备已有接线配置，请保留现有配置" = "The device already has wiring configured. Keep the existing configuration";
+"接线已保存，请重新连接" = "Wiring saved. Reconnect the robot";
+"保存已确认的默认接线" = "Save confirmed default wiring";
+
+"设备状态尚未确认" = "Device status has not been confirmed";
+
+"接线未配置，机器人无法移动" = "Motor wiring is not configured. The robot cannot move.";
+"配置接线" = "Configure motor wiring";
+"确认默认电机接线" = "Confirm default motor wiring";
+"保存接线并重启" = "Save wiring and restart";
+
+"检查更新" = "Check for updates";
+"发现新版本" = "Update available";
+"已是最新版本" = "Already up to date";
+"正在下载固件" = "Downloading firmware";
+"正在上传固件" = "Uploading firmware";
+"设备正在写入与校验" = "Device writing and verifying";
+"设备正在下载并安装" = "Device downloading and installing";
+"正在安装固件" = "Installing firmware";
+"版本已变化，请确认后再次安装" = "Release changed. Confirm and install again";
+
+"机器人" = "Robot";
+"人格" = "Personality";
+"视觉" = "Vision";
+"身份" = "Identity";
+"名字" = "Name";
+"身份描述" = "Identity description";
+"代词" = "Pronouns";
+"好奇" = "Curiosity";
+"温柔" = "Gentleness";
+"玩心" = "Playfulness";
+"害羞" = "Shyness";
+"亲近" = "Affection";
+"独立" = "Independence";
+"表达欲" = "Talkativeness";
+"谨慎" = "Caution";
+"语言风格" = "Speech style";
+"简短回复" = "Short replies";
+"避免过度解释" = "Avoid over-explaining";
+"温暖程度" = "Warmth";
+"幽默程度" = "Humor";
+"诗意表达" = "Poetic identity";
+"保存人格" = "Save personality";
+"重置人格" = "Reset personality";
+"导入人格 JSON" = "Import personality JSON";
+"导出人格 JSON" = "Export personality JSON";
+"人格已保存" = "Personality saved";
+"人格文件无效，原配置已保留" = "Invalid personality file. Previous settings were retained.";
+"导出未完成" = "Export was not completed";
+"行为与待机" = "Behavior & idle";
+"本地行为" = "Local behavior";
+"启用规则待机" = "Rule-based idle behavior";
+"允许待机身体动作" = "Allow idle body movement";
+"待机身体动作仍受本次运动许可限制" = "Idle movement still requires this session’s motion permission.";
+"静默休眠秒数" = "Sleep after silence (seconds)";
+"待机间隔倍率" = "Idle interval multiplier";
+"主动 AI" = "Proactive AI";
+"启用主动思考" = "Enable proactive thinking";
+"允许主动表达" = "Allow proactive expression";
+"每分钟思考上限" = "Maximum thoughts per minute";
+"主动表达最短间隔秒数" = "Minimum expression interval (seconds)";
+"主动思考会额外调用当前 AI 服务；Live 使用语音，文字模式显示消息。表达欲越低，实际表达间隔越长。" = "Proactive thinking adds requests to your AI service. Live uses speech; text mode shows messages. Lower talkativeness means longer expression intervals.";
+"行为风格" = "Behavior style";
+"动作柔和度" = "Movement softness";
+"反应速度" = "Reaction speed";
+"待机活跃度" = "Idle activity";
+"情绪表达" = "Emotional expressiveness";
+"犹豫程度" = "Hesitation";
+"空间尊重" = "Respect for personal space";
+"保存行为风格" = "Save behavior style";
+"本地识别" = "On-device detection";
+"选择目标" = "Select target";
+"设为参考" = "Set as reference";
+"陪伴时跟随此目标" = "Follow this target during companionship";
+"实验性相对跟随，不测距、不避障、不防跌落。选好目标后，用底部播放按钮开始陪伴。" = "Experimental relative following. No distance measurement, obstacle avoidance or fall protection. Select a target, then start with the play button.";
+"选择目标并设为参考" = "Select a target and set a reference";
+"目标已选择，请设为参考" = "Target selected. Set a reference.";
+"参考已保存，可开启陪伴时跟随" = "Reference saved. You may enable following.";
+"目标已过期，请重新选择" = "Target expired. Select it again.";
+"请先选择目标并设为参考" = "Select a target and set a reference first.";
+"目标已失效，请退出陪伴重新选择" = "Target is no longer valid. Exit companionship and select again.";
+"跟随已停止" = "Following stopped";
+"跟随已停止，需重新选择目标" = "Following stopped. Select the target again.";
+"相机不可用，请检查权限" = "Camera unavailable. Check permissions.";
+"目标丢失或存在歧义，请重新选择" = "Target lost or ambiguous. Select again.";
+"相机已变化，请重新选择目标" = "Camera changed. Select the target again.";
+"正在跟随" = "Following";
+"检测过期或设备温度较高，跟随已停止" = "Stale detection or high temperature. Following stopped.";
+"跟随指令失败，运动已停止" = "Follow command failed. Motion stopped.";
+"当前状态无法主动思考" = "Proactive thinking is unavailable in the current state.";
+"已达到主动思考频率限制" = "Proactive thinking rate limit reached.";
+"本地识别模型无法加载，语音和相机仍可使用" = "The local detector could not load. Voice and camera remain available.";
+"设备温度较高，检测已降频，跟随暂停" = "Device temperature is high. Detection slowed and following is paused.";
+"组件状态" = "Component status";
+"测试" = "Tests";
+"规则和主动思考在陪伴时运行，结束后可在此查看决策记录。" = "Rules and proactive thinking run during companionship. Review their decisions here after stopping.";
+"清理记录" = "Clear records";
+"导出脱敏诊断" = "Export redacted diagnostics";
+"最近决策" = "Recent decisions";
+"最近事件" = "Recent events";
+"会话" = "Session";
+"录音" = "Microphone";
+"播放" = "Playback";
+"音频路由" = "Audio route";
+"相机" = "Camera";
+"检测耗时" = "Detection time";
+"检测数量" = "Detection count";
+"跟随" = "Following";
+"运动来源" = "Motion owner";
+"视频帧数" = "Video frames";
+"音频块数" = "Audio chunks";
+"待机" = "Idle state";
+"音频缓冲" = "Audio buffer";
+"诊断" = "Diagnostics";
+"触发本地规则" = "Trigger a local rule";
+"主动思考一次" = "Think once";
+"控制来源优先级冲突" = "Another higher-priority controller is active";
+"人格或配置数据无效" = "Invalid personality or configuration data";
+
+"设置" = "Settings";
+
+"连接与对话" = "Connections and conversation";
+
+"Google 实时 AI 不支持当前网络出口所在地区；请核对服务支持地区或选择其他 AI 服务。" = "Google Live AI does not support the region of this network connection. Check service availability or choose another AI provider.";
+
+"陪伴继续，实时 AI 暂不可用" = "Companionship continues. Live AI is unavailable.";
+
+"重试实时 AI" = "Retry Live AI";
+
+"仅 Gemini／标准 Vertex 实时语音支持唤醒模式；文字模式保持原有方式。" = "Wake mode requires Gemini or standard Vertex Live. Text mode is unchanged.";
+
+"休眠时" = "While sleeping";
+
+"使用唤醒词开始对话" = "Start conversations with a wake phrase";
+
+"停止预览" = "Stop preview";
+
+"全局时长倍率" = "Global duration scale";
+
+"全局节奏" = "Global timing";
+
+"全局速度倍率" = "Global speed scale";
+
+"内置场景" = "Built-in scenes";
+
+"冷却秒数" = "Cooldown seconds";
+
+"只在前台陪伴时监听；进入后台或电话中断后需手动恢复。" = "Listens only in foreground companionship. Resume manually after backgrounding or a call.";
+
+"启用此场景" = "Enable this scene";
+
+"唤醒后连续对话；静默超时返回等待，不自动恢复身体动作。" = "Talk continuously after waking. Silence returns to waiting without restoring body motion.";
+
+"唤醒模式" = "Wake mode";
+
+"唤醒短语" = "Wake phrase";
+
+"回到等待唤醒" = "Return to wake listening";
+
+"场景时长倍率" = "Scene duration scale";
+
+"场景速度倍率" = "Scene speed scale";
+
+"始终可用" = "Always available";
+
+"对话静默超时秒数" = "Conversation silence timeout (seconds)";
+
+"导入陪伴配置" = "Import companion settings";
+
+"导出陪伴配置" = "Export companion settings";
+
+"已关闭" = "Disabled";
+
+"待机场景" = "Idle scenes";
+
+"恢复默认场景" = "Reset scene defaults";
+
+"手动唤醒" = "Wake manually";
+
+"播放语音时只使用表情；身体动作仍需本次运动许可。" = "Only expressions run during speech playback. Body motion still requires session permission.";
+
+"最短秒数" = "Minimum seconds";
+
+"最短重复间隔秒数" = "Minimum repeat interval (seconds)";
+
+"最长秒数" = "Maximum seconds";
+
+"未知" = "Unknown";
+
+"检查本地识别权限" = "Check local recognition permission";
+
+"每次开始陪伴重置；结束后可查看最近状态。" = "Resets for each session. Review the latest state after stopping.";
+
+"清醒时" = "While awake";
+
+"生命状态" = "Life state";
+
+"生命状态是模拟数值，不代表真实感受或传感器测量。" = "Life values are simulated, not real feelings or sensor measurements.";
+
+"相对权重" = "Relative weight";
+
+"等待期间不上传声音或画面。不支持本地识别时保留手动唤醒，不使用网络识别。" = "No audio or images are uploaded while waiting. Use manual wake if local recognition is unavailable; network recognition is never used.";
+
+"语音与唤醒" = "Voice and wake";
+
+"适用状态" = "Availability";
+
+"配置无效，原配置已保留" = "Invalid settings. Your previous configuration was kept.";
+
+"重试本地监听" = "Retry local listening";
+
+"陪伴配置" = "Companion settings";
+
+"陪伴配置包括人格、行为、场景和唤醒设置，不包含凭据或运行记录。" = "Includes personality, behavior, scenes and wake settings, without credentials or session history.";
+
+"陪伴配置已保存" = "Companion settings saved";
+
+"预览" = "Preview";
+
+"预览一次" = "Preview once";
+
+"首次待机" = "First idle interval";
+
+"静默期间" = "During silence";
+
+"对话间隙" = "Between conversation turns";
+
+"身体预览会真实移动机器人，请留出空间。" = "A body preview moves the robot. Leave space around it.";
+
+"表情预览不移动身体。" = "Expression previews do not move the body.";
+
+"精力" = "Energy";
+
+"无聊" = "Boredom";
+
+"孤独" = "Loneliness";
+
+"舒适度" = "Comfort";
+
+"情绪" = "Mood";
+
+"注意力" = "Attention";
+
+"休眠" = "Sleeping";
+
+"是" = "Yes";
+
+"否" = "No";
+
+"变化原因" = "Reason";
+
+"用户身份" = "User identity";
+
+"距离" = "Distance";
+
+"障碍" = "Obstacle";
+
+"尚未检查本地识别" = "Local recognition has not been checked";
+
+"请允许语音识别；仍可手动唤醒" = "Allow speech recognition, or wake manually.";
+
+"此语言的本地识别不可用；仍可手动唤醒" = "Local recognition is unavailable for this language. Manual wake is available.";
+
+"本地语音识别暂不可用；仍可手动唤醒" = "Local recognition is temporarily unavailable. Manual wake is available.";
+
+"本地识别可用，不上传等待期间的声音" = "Local recognition is available. Audio stays on device while waiting.";
+
+"等待唤醒" = "Waiting for wake phrase";
+
+"音频采集已中断，请手动恢复" = "Audio capture was interrupted. Resume manually.";
+
+"麦克风不可用，请检查权限后重试" = "Microphone unavailable. Check permission and retry.";
+
+"本地识别已停止；请手动唤醒或重试" = "Local recognition stopped. Wake manually or retry.";
+
+"正在连接实时对话" = "Connecting Live conversation";
+
+"连接已就绪，刚才的问题过长，请重新说一遍" = "Connected. The buffered question was too long; please say it again.";
+
+"可以连续对话" = "Ready for continuous conversation";
+
+"实时连接失败，请手动唤醒重试" = "Live connection failed. Wake manually to retry.";
+
+"已暂停，回到前台后请手动恢复采集" = "Paused. Resume capture manually after returning to the app.";
+
+"请先唤醒，再发送消息" = "Wake the companion before sending a message.";
+
+"场景预览完成" = "Scene preview complete";
+
+"场景预览已停止，请检查连接" = "Scene preview stopped. Check the connection.";
+
+"等待唤醒期间不跟随，请手动开启运动" = "Following is disabled while waiting. Enable motion explicitly.";
+
+"唤醒状态" = "Wake state";
+
+"唤醒次数" = "Wake count";
+
+"唤醒缓冲溢出" = "Wake buffer overflow";
+
+"neutral" = "Neutral";
+
+"attentive" = "Attentive";
+
+"curious" = "Curious";
+
+"happy" = "Happy";
+
+"sleepy" = "Sleepy";
+
+"shy" = "Shy";
+
+"none" = "None";
+
+"resting" = "Resting";
+
+"interaction" = "Interaction";
+
+"surroundings" = "Surroundings";
+
+"session_started" = "Session started";
+
+"user_activity" = "User interaction";
+
+"wake" = "Wake phrase";
+
+"visual_change" = "Visual category changed";
+
+"playback_started" = "Playback started";
+
+"playback_stopped" = "Playback stopped";
+
+"motion_started" = "Motion started";
+
+"motion_stopped" = "Motion stopped";
+
+"connected" = "Connected";
+
+"disconnected" = "Disconnected";
+
+"no_eligible_scene" = "No eligible scene";
+
+"idle_scene" = "Idle scene";
+
+"life_changed" = "Life state changed";
+
+"本地识别失败：%@；请手动唤醒或重试" = "Local recognition failed: %@. Wake manually or retry.";

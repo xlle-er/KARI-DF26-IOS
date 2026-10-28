@@ -1,0 +1,18 @@
+{
+  "name": "kari-df26-ios",
+  "version": "1.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:resources": "node scripts/build-resources.mjs",
+    "test:native": "python3 scripts/test-native.py",
+    "check:localization": "python3 scripts/check-localization.py",
+    "test:face": "playwright test",
+    "check:privacy": "python3 scripts/check-privacy.py",
+    "test:device": "zsh scripts/test-device.sh"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.55.1",
+    "esbuild": "0.28.2"
+  }
+}
