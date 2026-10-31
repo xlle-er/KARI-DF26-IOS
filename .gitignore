@@ -39,3 +39,7 @@ test-results/
 playwright-report/
 
 .cache/
+
+# Rebuilt from pinned upstream source; never commit framework binaries or GGUF weights.
+Native/Vendor/llama.xcframework/
+*.gguf

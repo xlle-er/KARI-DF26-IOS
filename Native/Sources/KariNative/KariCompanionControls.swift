@@ -57,6 +57,7 @@ struct KariCompanionControls: View {
                 }
                 if !app.textReply.isEmpty { Text(app.textReply).font(.subheadline).lineLimit(4).frame(maxWidth: .infinity, alignment: .leading) }
             }
+            KariMemorySources(hits: app.memory.hits)
             if !landscape {
             Button(action: primary) {
                 Label(app.phase == .stopping ? L("正在结束…") : app.phase == .testing ? L("取消测试") : app.phase == .starting ? L("取消连接") : app.isActive ? L("退出陪伴") : L("开始陪伴"), systemImage: app.phase == .idle ? "play.fill" : "stop.fill")

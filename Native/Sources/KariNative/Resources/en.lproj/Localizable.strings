@@ -701,3 +701,142 @@
 "life_changed" = "Life state changed";
 
 "本地识别失败：%@；请手动唤醒或重试" = "Local recognition failed: %@. Wake manually or retry.";
+
+"记忆库" = "Memory";
+
+"网络及OTA" = "Network & OTA";
+
+"向量服务与本机模型" = "Embedding service & local models";
+
+"资料保存在当前手机，所有机器人共用。本机向量化不上传全文；云端聊天会收到检索命中的片段。" = "Documents stay on this phone and are shared by your robots. On-device embedding does not upload documents; cloud chat receives retrieved excerpts.";
+
+"资料" = "Documents";
+
+"导入资料" = "Import documents";
+
+"PDF（含扫描件）、TXT、Markdown、DOCX、XLSX、PPTX。单文件最多 50 MB，PDF 最多 500 页。" = "PDF (including scans), TXT, Markdown, DOCX, XLSX and PPTX. Up to 50 MB per file and 500 pages per PDF.";
+
+"搜索资料" = "Search documents";
+
+"已停用" = "Disabled";
+
+"导入资料后，KARI 就可以根据这些记忆回答问题。" = "Import documents so KARI can answer questions from your memory.";
+
+"问问记忆" = "Ask your memory";
+
+"根据资料提问…" = "Ask about your documents…";
+
+"正在回答…" = "Answering…";
+
+"提问" = "Ask";
+
+"暂停处理" = "Pause processing";
+
+"重试／重建索引" = "Retry / rebuild index";
+
+"清空记忆库" = "Clear memory";
+
+"清空记忆库？" = "Clear memory?";
+
+"清空" = "Clear";
+
+"将删除本机导入的所有资料和索引，已下载模型保留。" = "Deletes all imported documents and indexes from this phone. Downloaded models are kept.";
+
+"检索资料" = "Retrieved documents";
+
+"参与问答" = "Include in answers";
+
+"提取内容" = "Extracted text";
+
+"删除资料" = "Delete document";
+
+"删除资料？" = "Delete document?";
+
+"向量化方式" = "Embedding mode";
+
+"模式" = "Mode";
+
+"跟随 AI 服务商" = "Use current AI provider";
+
+"其他向量服务／Ollama" = "Other embedding service / Ollama";
+
+"手机本机模型" = "On-device model";
+
+"复用当前 AI 配置；无法启用时，可在此选择其他服务或本机模型，不影响聊天服务。" = "Uses your current AI credentials. If unavailable, choose another embedding service or an on-device model without changing chat.";
+
+"兼容服务" = "Compatible service";
+
+"向量模型" = "Embedding model";
+
+"API Key（留空保留）" = "API key (leave blank to keep)";
+
+"填写电脑的局域网地址；模型需先在电脑安装。iPhone 的 localhost 不指向电脑。" = "Enter your computer’s LAN address and install the embedding model there first. localhost on iPhone does not refer to your computer.";
+
+"测试已保存配置" = "Test saved configuration";
+
+"手机模型下载" = "On-device model downloads";
+
+"自动按实际连通性选择来源，只使用版本及哈希一致的镜像。模型下载完成后需要通过加载测试。" = "Auto selects a reachable source. Mirrors must have identical versions and hashes. Downloaded models must pass a loading test.";
+
+"下载来源" = "Download source";
+
+"自动" = "Auto";
+
+"维" = "dimensions";
+
+"暂无核验通过的魔搭镜像" = "No verified ModelScope mirror";
+
+"暂停下载" = "Pause download";
+
+"使用此模型" = "Use this model";
+
+"下载／继续" = "Download / resume";
+
+"向量服务与模型" = "Embedding service & models";
+
+"使用蜂窝网络下载？" = "Download over cellular?";
+
+"下载" = "Download";
+
+"删除已下载模型？" = "Delete downloaded model?";
+
+"资料保留。再次使用此模型前需要重新下载。" = "Documents are kept. Download this model again before using it.";
+
+"多语言推荐" = "Multilingual · recommended";
+
+"多语言进阶" = "Multilingual · advanced";
+
+"中文轻量" = "Lightweight Chinese";
+
+"多语言轻量" = "Lightweight multilingual";
+
+"英文轻量" = "Lightweight English";
+
+"等待处理" = "Waiting";
+
+"等待向量化" = "Waiting for embedding";
+
+"可用" = "Ready";
+
+"失败" = "Failed";
+
+"已暂停" = "Paused";
+
+"模型来源与许可证" = "Model source & license";
+
+"使用已有 Google OAuth 授权。" = "Uses your existing Google OAuth authorization.";
+
+"未找到相关记忆。当前离线陪伴不生成资料回答。" = "No relevant memory found. Offline companionship does not generate document answers.";
+
+"当前离线陪伴不生成资料回答，以下是检索到的原文：" = "Offline companionship does not generate document answers. Here are the retrieved excerpts:";
+
+"当前索引" = "Current index";
+
+"尚未建立索引" = "No index yet";
+
+"记忆库不会自动记录聊天或音视频。" = "Memory does not automatically record chat, audio or video.";
+
+"资料问答不会执行动作，请单独下达动作指令" = "Document questions do not execute actions. Give a separate direct action command.";
+"删除" = "Delete";
+"服务商" = "Provider";
+"模型" = "Model";

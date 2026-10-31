@@ -11,6 +11,7 @@ import Combine
     @Published private(set) var liveConnectionFailure = ""
     private let liveStarter: ((KariAIConfiguration) async throws -> Void)?
     var liveFailure: String { settings.configuration.isLive ? (live.error.isEmpty ? liveConnectionFailure : live.error) : "" }
+    let memory: KariMemoryService
     let settings: KariSettings
     let companion: KariCompanionFeatures
     let motion = KariMotionCoordinator()
@@ -42,14 +43,28 @@ import Combine
               let name = properties["name"] as? [String: Any], let values = name["enum"] as? [String] else { return [] }
         return Set(values)
     }()
-    var isBusy: Bool { remote.presented || remote.state == .stopping || recovering || phase == .starting || phase == .testing || phase == .stopping }
+    var isBusy: Bool { memory.busy || memory.committing || remote.presented || remote.state == .stopping || recovering || phase == .starting || phase == .testing || phase == .stopping }
     var isActive: Bool { phase == .active }
     init(defaults suppliedDefaults: UserDefaults? = nil, liveStarter: ((KariAIConfiguration) async throws -> Void)? = nil) {
         self.liveStarter = liveStarter
         let testing = ProcessInfo.processInfo.arguments.contains("--ui-testing")
-        let defaults = suppliedDefaults ?? (testing ? UserDefaults(suiteName: "app.kari.personal.ui-tests")! : .standard)
-        if testing && suppliedDefaults == nil { defaults.removePersistentDomain(forName: "app.kari.personal.ui-tests") }
+        let defaults = suppliedDefaults ?? (testing ? UserDefaults(suiteName: "app.kari.public.ui-tests")! : .standard)
+        if testing && suppliedDefaults == nil { defaults.removePersistentDomain(forName: "app.kari.public.ui-tests") }
         settings = KariSettings(defaults: defaults); companion = KariCompanionFeatures(defaults: defaults)
+        memory = KariMemoryService(defaults: defaults, root: testing ? FileManager.default.temporaryDirectory.appendingPathComponent("kari-memory-ui-tests") : nil)
+        memory.canMutate = { [weak self] in self?.phase == .idle }
+        memory.changed = { [weak self] in self?.live.clearResumption() }
+        memory.$ready.filter { $0 }.sink { [weak self] _ in
+            Task { @MainActor in guard let self else { return }; self.memory.resume(self.settings.configuration) }
+        }.store(in: &subscriptions)
+        memory.objectWillChange.sink { [weak self] _ in self?.objectWillChange.send() }.store(in: &subscriptions)
+        settings.$configuration.dropFirst().sink { [weak self] _ in self?.memory.invalidateQuery(); self?.live.clearResumption() }.store(in: &subscriptions)
+        live.memoryAvailable = { [weak self] in self?.memory.hasEnabledDocuments == true }
+        live.onMemorySearch = { [weak self] query in
+            guard let self else { throw CancellationError() }
+            return try await self.memory.search(query, chat: self.settings.configuration).map(\.json)
+        }
+        live.onMemoryCancel = { [weak self] in self?.memory.invalidateQuery() }
         if testing { try? settings.save(.fresh("rule"), key: "") }
         companion.attach(self); wake.app = self
         wake.objectWillChange.sink { [weak self] _ in self?.objectWillChange.send() }.store(in: &subscriptions)
@@ -145,7 +160,8 @@ import Combine
         }
     }
     func stop() async {
-        token = UUID(); operation?.cancel(); textOperation?.cancel(); textToken = UUID(); phase = .stopping
+        token = UUID(); operation?.cancel(); memory.invalidateQuery()
+        textOperation?.cancel(); textToken = UUID(); phase = .stopping
         recovering = false; wake.stop(); companion.end(); remote.close()
         live.stop(); camera.stop(); face.cancel(); settings.motionEnabled = false; textBusy = false; scenarioBusy = false
         UIApplication.shared.isIdleTimerDisabled = false
@@ -314,18 +330,44 @@ import Combine
             guard current == token else { return }; live.stop(); phase = .idle
         }
     }
-    func textRequest(_ text: String, image: Data? = nil, allowActions: Bool = false, autonomous: Bool = false) async throws -> String {
+    func textRequest(_ text: String, image: Data? = nil, allowActions: Bool = false, autonomous: Bool = false, useMemory: Bool = false) async throws -> String {
         let config = settings.configuration
-        if config.isOffline { return KariConversationLanguage.offlineReply(to: text, fallback: KariLocalization.shared.language) }
+        if config.isOffline {
+            if useMemory {
+                let results = try await memory.search(text, chat: config)
+                return results.isEmpty ? L("未找到相关记忆。当前离线陪伴不生成资料回答。") : L("当前离线陪伴不生成资料回答，以下是检索到的原文：") + "\n\n" + results.map(\.context).joined(separator: "\n\n")
+            }
+            return KariConversationLanguage.offlineReply(to: text, fallback: KariLocalization.shared.language)
+        }
         let key = try await KariCredentials.token(config)
         var instruction = "You are KARI, a warm, concise desktop companion. " + KariConversationLanguage.instruction(fallback: KariLocalization.shared.language) + companion.profile.instruction
         if allowActions {
             instruction += "Return only JSON: {\"text\":\"your natural reply in the user’s language\",\"scenario\":null}. Choose a scenario only when movement is permitted by the context, and only from: \(scenarioNames.sorted().joined(separator: ",")). Body connected: \(body.isConnected). Motion allowed: \(settings.motionEnabled). If disconnected or movement is not permitted, scenario must be null. Never claim to have moved when movement is unavailable. Never mention internal scenario names."
         }
         if autonomous { instruction += " This is optional idle reflection, not a user command. Only suggest an allowlisted scene; never raw commands. Body actions allowed: \(companion.behavior.idleBody && settings.motionEnabled)." } else { instruction += " Only move on explicit user request." }
-        let request = try KariAIRequest.text(config, key: key, prompt: text, image: image, systemInstruction: instruction)
+        var context: [KariMemoryHit] = []
+        var memoryTicket: UUID?
+        var prompt = text
+        if useMemory && memory.hasEnabledDocuments {
+            instruction += " " + KariMemoryService.instruction
+            do {
+                context = try await memory.search(text, chat: config)
+                memoryTicket = memory.searchGeneration
+                prompt += "\n\n<retrieved_memory>\n" + (context.isEmpty ? "No relevant memory found." : context.map(\.context).joined(separator: "\n\n")) + "\n</retrieved_memory>"
+            } catch is CancellationError { throw CancellationError() }
+            catch {
+                memory.invalidateQuery()
+                notice = "记忆检索暂不可用：" + KariAIRequest.redact(error.localizedDescription)
+                prompt += "\nMemory search failed. Tell the user that memory is temporarily unavailable; do not claim the library contains no information."
+            }
+        }
+        try Task.checkCancellation()
+        let request = try KariAIRequest.text(config, key: key, prompt: prompt, image: image, systemInstruction: instruction)
         let (data, response) = try await URLSession.shared.data(for: request)
-        return try KariAIRequest.response(data, status: (response as? HTTPURLResponse)?.statusCode ?? 0, provider: config.provider)
+        let reply = try KariAIRequest.response(data, status: (response as? HTTPURLResponse)?.statusCode ?? 0, provider: config.provider)
+        try Task.checkCancellation()
+        if let memoryTicket, memoryTicket != memory.searchGeneration { throw CancellationError() }
+        return useMemory ? memory.filterCitations(reply, hits: context) : reply
     }
     @discardableResult func sendText(_ text: String, includeImage: Bool = false) -> Bool {
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return false }
@@ -336,15 +378,21 @@ import Combine
         let image = includeImage ? camera.snapshot() : nil
         if includeImage && image == nil { notice = "请先开启摄像头并等待画面"; return false }
         let current = token
+        memory.cancelSearch()
         textOperation?.cancel(); textToken = UUID(); let messageToken = textToken
         textBusy = true
         textOperation = Task {
             defer { if messageToken == textToken { textBusy = false } }
             do {
-                let raw = try await textRequest(text, image: image, allowActions: true)
+                let raw = try await textRequest(text, image: image, allowActions: true, useMemory: true)
                 guard current == token, messageToken == textToken else { return }
                 let reply = KariAIRequest.companionReply(raw, allowedScenarios: scenarioNames); textReply = reply.text
-                if let scenario = reply.scenario, phase == .active { try await runScenario(scenario) }
+                if let scenario = reply.scenario, phase == .active {
+                    guard !memory.hasEnabledDocuments || KariMemoryActionPolicy.isDirectCommand(text) else {
+                        textReply = L("资料问答不会执行动作，请单独下达动作指令"); return
+                    }
+                    try await runScenario(scenario)
+                }
             }
             catch { if current == token && messageToken == textToken { notice = error.localizedDescription } }
         }

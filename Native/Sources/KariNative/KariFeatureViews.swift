@@ -107,14 +107,12 @@ struct KariBehaviorView: View {
     }
 }
 
-struct KariVisionView: View {
+struct KariVisionContent: View {
     @ObservedObject var app: KariAppModel
     @ObservedObject var features: KariCompanionFeatures
     @ObservedObject var vision: KariVisionService
     @ObservedObject var camera: KariCamera
     var body: some View {
-        NavigationView {
-            ScrollView {
                 VStack(spacing: 18) {
                     ZStack(alignment: .topLeading) {
                         if camera.running {
@@ -145,9 +143,7 @@ struct KariVisionView: View {
                     Text(L("实验性相对跟随，不测距、不避障、不防跌落。选好目标后，用底部播放按钮开始陪伴。")).font(.footnote).foregroundStyle(.secondary).accessibilityIdentifier("visionFooter")
                     if !vision.message.isEmpty { Text(LM(vision.message)).foregroundStyle(.orange) }
                     if !features.message.isEmpty { Text(LM(features.message)).font(.footnote) }
-                }.padding(20)
-            }.navigationTitle(L("视觉"))
-        }.navigationViewStyle(.stack)
+                }.padding(20).buttonStyle(.borderless)
     }
 }
 

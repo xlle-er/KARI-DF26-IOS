@@ -41,10 +41,10 @@ struct KariNativeTabs: UIViewControllerRepresentable {
         init(selection: Binding<Int>, start: @escaping () -> Void) { self.selection = selection; self.start = start }
         func install(_ pages: [AnyView], in controller: UITabBarController, language: String) {
             self.language = language
-            let titles = [L("机器人"), L("人格"), L("视觉"), L("设置")]
-            let icons = ["wrench.and.screwdriver", "person.crop.circle", "viewfinder", "gearshape"]
+            let titles = [L("机器人"), L("人格"), L("记忆库"), L("设置")]
+            let icons = ["wrench.and.screwdriver", "person.crop.circle", "books.vertical", "gearshape"]
             var controllers: [UIViewController] = []
-            for index in 0..<4 {
+            for index in pages.indices {
                 if index == 2 {
                     let action = UIViewController(); action.view.backgroundColor = .black
                     let item = UITabBarItem(title: nil, image: UIImage(systemName: "play.fill"), tag: -1)

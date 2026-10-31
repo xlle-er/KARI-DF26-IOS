@@ -44,6 +44,9 @@ import GoogleSignIn
     private var sharedCaptureID = UUID()
     private var sharedFrame: ((Data, Double) -> Void)?
     private var sharedState: ((String, String) -> Void)?
+    var memoryAvailable: (() -> Bool)?
+    var onMemorySearch: ((String) async throws -> [[String: Any]])?
+    var onMemoryCancel: (() -> Void)?
     var onScenario: ((String) async throws -> Void)?
     var onCancel: (() -> Void)?
     var onImmediateStop: (() -> Void)?
@@ -89,6 +92,11 @@ import GoogleSignIn
     private var audioBuffers = 0
     private var playbackGeneration = 0
     private var cancelledToolIDs = Set<String>()
+    private var scenarioToolIDs = Set<String>()
+    private var memoryToolIDs = Set<String>()
+    private var memoryHasBeenUsed = false
+    private var userUtterance = ""
+    private var awaitingNewUserInput = true
     private var resumeHandle: String?
     private var previousConfig: KariAIConfiguration?
     private var previousWasTest = false
@@ -144,7 +152,14 @@ import GoogleSignIn
             if !testOnly {
                 let instruction = payload["systemInstruction"] as? [String: Any] ?? [:]
                 var parts = instruction["parts"] as? [[String: Any]] ?? []
-                parts.append(["text": personality?() ?? ""]); payload["systemInstruction"] = ["parts": parts]
+                parts.append(["text": personality?() ?? ""])
+                if memoryAvailable?() == true {
+                    parts.append(["text": KariMemoryService.instruction + " Use search_memory with a self-contained query before answering document or personal-memory questions. State only references returned by that tool. Never read UUID citation IDs aloud; mention document names and locations instead."])
+                    var tools = payload["tools"] as? [[String: Any]] ?? []
+                    tools.append(["functionDeclarations": [["name": "search_memory", "description": "Search the user's imported memory documents; no physical actions.", "parameters": ["type": "OBJECT", "properties": ["query": ["type": "STRING", "description": "A self-contained search question"]], "required": ["query"]]]]])
+                    payload["tools"] = tools
+                }
+                payload["systemInstruction"] = ["parts": parts]
             }
             if let resumeHandle { payload["sessionResumption"] = ["handle": resumeHandle] }
             wrapper["setup"] = payload
@@ -213,7 +228,7 @@ import GoogleSignIn
     }
     func recoverMicrophone() async throws { audio.stopMicrophone(); microphone = false; guard connected else { return }; try await startMicrophone(token: generation) }
     func sendFrame(_ jpeg: Data) { guard connected, queuedMessages < 6 else { return }; sentVideoFrames += 1; enqueue(["realtimeInput": ["video": ["data": jpeg.base64EncodedString(), "mimeType": "image/jpeg"]]], token: generation) }
-    func sendText(_ text: String) { guard connected else { return }; processing = true; enqueue(["clientContent": ["turns": [["role": "user", "parts": [["text": text]]]], "turnComplete": true]], token: generation) }
+    func sendText(_ text: String) { guard connected else { return }; userUtterance = text; awaitingNewUserInput = false; processing = true; enqueue(["clientContent": ["turns": [["role": "user", "parts": [["text": text]]]], "turnComplete": true]], token: generation) }
     private func enqueue(_ object: [String: Any], token: Int) {
         guard token == generation, let socket, let data = try? JSONSerialization.data(withJSONObject: object), let text = String(data: data, encoding: .utf8) else { return }
         guard queuedMessages < 48 else { fail("网络发送过慢，请检查网络后恢复连接"); return }
@@ -231,9 +246,11 @@ import GoogleSignIn
         if message["setupComplete"] != nil { setupTimeout?.cancel(); let continuation = setup; setup = nil; continuation?.resume() }
         if let resume = message["sessionResumptionUpdate"] as? [String: Any], resume["resumable"] as? Bool != false, let handle = resume["newHandle"] as? String { resumeHandle = handle }
         let content = message["serverContent"] as? [String: Any] ?? [:]
-        if content["interrupted"] as? Bool == true { serverInterruptions += 1; playbackGeneration += 1; audio.stop(); audioBuffers = 0; speaking = false; discardAudioUntilTurnComplete = false }
+        if content["interrupted"] as? Bool == true { onMemoryCancel?(); serverInterruptions += 1; playbackGeneration += 1; audio.stop(); audioBuffers = 0; speaking = false; discardAudioUntilTurnComplete = false }
         if let transcription = content["inputTranscription"] as? [String: Any], let text = transcription["text"] as? String {
             processing = true
+            if awaitingNewUserInput { userUtterance = ""; awaitingNewUserInput = false }
+            if userUtterance.count < 2000 { userUtterance += text }
             heard = String((heard + text).suffix(1500))
             if KariAIRequest.isStopRequest(text) { onImmediateStop?() }
         }
@@ -257,26 +274,43 @@ import GoogleSignIn
             }
         }
         if content["generationComplete"] as? Bool == true { generationCompletions += 1 }
-        if content["turnComplete"] as? Bool == true { completedTurns += 1; turnComplete = true; processing = false; discardAudioUntilTurnComplete = false }
+        if content["turnComplete"] as? Bool == true { awaitingNewUserInput = true; completedTurns += 1; turnComplete = true; processing = false; discardAudioUntilTurnComplete = false }
         if let tool = message["toolCall"] as? [String: Any], let calls = tool["functionCalls"] as? [[String: Any]] {
+            for call in calls {
+                if let id = call["id"] as? String {
+                    if call["name"] as? String == "search_memory" { memoryToolIDs.insert(id); memoryHasBeenUsed = true }
+                    if call["name"] as? String == "run_scenario" { scenarioToolIDs.insert(id) }
+                }
+            }
             Task { [weak self] in
                 guard let self else { return }; var results: [[String: Any]] = []
                 for call in calls {
                     guard token == self.generation else { return }
                     let id = call["id"] as? String ?? ""
-                    if self.cancelledToolIDs.contains(id) { continue }
+                    if self.cancelledToolIDs.contains(id) { self.memoryToolIDs.remove(id); continue }
                     var response: [String: Any] = ["ok": true]
                     do {
-                        guard call["name"] as? String == "run_scenario", let args = call["args"] as? [String: Any], let name = args["name"] as? String, let run = self.onScenario else { throw KariError.message("未知动作请求") }
-                        try await run(name)
+                        guard let args = call["args"] as? [String: Any] else { throw KariError.message("工具参数无效") }
+                        if call["name"] as? String == "search_memory" {
+                            guard let query = args["query"] as? String, !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, query.count <= 2000, let search = self.onMemorySearch else { throw KariError.message("记忆检索参数无效") }
+                            response["results"] = try await search(query)
+                        } else {
+                            guard call["name"] as? String == "run_scenario", let name = args["name"] as? String, let run = self.onScenario else { throw KariError.message("未知动作请求") }
+                            guard !self.memoryHasBeenUsed || KariMemoryActionPolicy.isDirectCommand(self.userUtterance) else { throw KariError.message("资料问答不会执行动作，请单独下达动作指令") }
+                            try await run(name)
+                        }
                     } catch { response = ["ok": false, "reason": error.localizedDescription] }
+                    self.memoryToolIDs.remove(id)
                     if !self.cancelledToolIDs.contains(id) { results.append(["id": id, "name": call["name"] ?? "run_scenario", "response": response]) }
                 }
                 guard token == self.generation, !results.isEmpty else { return }; self.enqueue(["toolResponse": ["functionResponses": results]], token: token)
             }
         }
         if let cancellation = message["toolCallCancellation"] as? [String: Any] {
-            cancelledToolIDs.formUnion(cancellation["ids"] as? [String] ?? []); onCancel?()
+            let ids = Set(cancellation["ids"] as? [String] ?? [])
+            cancelledToolIDs.formUnion(ids)
+            if !ids.isDisjoint(with: memoryToolIDs) { onMemoryCancel?() }
+            if !ids.isDisjoint(with: scenarioToolIDs) { onCancel?() }
         }
     }
     private func playbackFailed(_ failure: Error) {
@@ -306,6 +340,7 @@ import GoogleSignIn
         pending?.resume(throwing: KariError.message(clean))
     }
     func stop(clearResume: Bool = true, preserveCapture: Bool = false) {
+        onMemoryCancel?(); memoryToolIDs.removeAll(); scenarioToolIDs.removeAll()
         generation += 1; connected = false; connecting = false; if !preserveCapture { microphone = false }; speaking = false; processing = false; audioBuffers = 0; queuedMessages = 0
         playbackGeneration += 1; cancelledToolIDs.removeAll()
         setupTimeout?.cancel(); ping?.cancel(); receiver?.cancel(); writer?.cancel(); writer = nil
@@ -314,7 +349,8 @@ import GoogleSignIn
         if preserveCapture { audio.stop() } else {
             endSharedCapture(); audio.shutdown(); try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         }
-        if clearResume { resumeHandle = nil }
+        if clearResume { resumeHandle = nil; memoryHasBeenUsed = false }
+        userUtterance = ""; awaitingNewUserInput = true
     }
     func testTone() async throws {
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in

@@ -1,6 +1,6 @@
 {
   "name": "kari-df26-ios",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,7 +10,9 @@
     "test:face": "playwright test",
     "check:privacy": "python3 scripts/check-privacy.py",
     "test:device": "zsh scripts/test-device.sh",
-    "build:icons": "node scripts/build-icons.mjs"
+    "build:icons": "node scripts/build-icons.mjs",
+    "test:memory": "zsh scripts/test-memory.sh",
+    "build:embedding": "zsh scripts/build-local-embedding-runtime.sh"
   },
   "devDependencies": {
     "@playwright/test": "1.55.1",

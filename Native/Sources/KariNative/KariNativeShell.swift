@@ -62,7 +62,7 @@ private enum KariDestination: String, Identifiable {
     case robots, ai, remote
     var id: String { rawValue }
 }
-private enum KariTab: Int { case robot, personality, vision, settings }
+private enum KariTab: Int { case robot, personality, memory, settings }
 
 struct KariRootView: View {
     @ObservedObject private var localization = KariLocalization.shared
@@ -94,9 +94,9 @@ struct KariRootView: View {
                     }
                 } else {
                     KariNativeTabs(selection: Binding(get: { tab.rawValue }, set: { tab = KariTab(rawValue: $0) ?? .robot }), session: app.body.management, pages: [
-                        AnyView(KariDeviceManagement(robot: app.body, wifi: app.body.wifi, embedded: true, connect: { destination = .robots }, remote: { destination = .remote })),
+                        AnyView(KariDeviceManagement(robot: app.body, wifi: app.body.wifi, embedded: true, connect: { destination = .robots }, remote: { destination = .remote }, vision: AnyView(KariVisionContent(app: app, features: app.companion, vision: app.companion.vision, camera: app.camera)))),
                         AnyView(KariPersonalityView(features: app.companion)),
-                        AnyView(KariVisionView(app: app, features: app.companion, vision: app.companion.vision, camera: app.camera)),
+                        AnyView(KariMemoryView(app: app, memory: app.memory)),
                         AnyView(KariNativeSettingsPage(app: app, robots: { destination = .robots }, ai: { destination = .ai }))
                     ], language: localization.language, canStart: !app.isBusy, start: { guard !app.body.management.busy, app.body.management.info["ota_mode"] as? Bool != true else { return }; app.start() })
                     .ignoresSafeArea()
@@ -108,7 +108,7 @@ struct KariRootView: View {
                 try? await Task.sleep(nanoseconds: 5_000_000_000)
                 if !Task.isCancelled { withAnimation { controlsVisible = false } }
             }
-            .onChange(of: app.phase) { _ in controlsVisible = companion; if companion { destination = nil } }
+            .onChange(of: app.phase) { _ in controlsVisible = companion; if companion { destination = nil }; if app.phase == .idle && scenePhase == .active { app.memory.resume(app.settings.configuration) } }
             .onChange(of: app.remote.presented) { if $0 { controlsVisible = true } }
             .onChange(of: geometry.size) { _ in app.camera.updateOrientation(); if app.remote.presented { app.remote.emergencyStop() } }
             .onAppear {
@@ -126,8 +126,8 @@ struct KariRootView: View {
         }
         .onChange(of: scenePhase) { phase in
             if phase != .active { app.remote.emergencyStop() }
-            if phase == .background { Task { await app.suspendForBackground() } }
-            if phase == .active { localization.refreshSystemLanguage() }
+            if phase == .background { app.memory.suspend(); Task { await app.suspendForBackground() } }
+            if phase == .active { localization.refreshSystemLanguage(); app.memory.resume(app.settings.configuration) }
         }
     }
     private var activeControls: some View {

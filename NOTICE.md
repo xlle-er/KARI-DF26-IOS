@@ -22,3 +22,9 @@ The fixed burger test fixture comes from Google's MediaPipe sample assets: https
 `App/AppIcon.icon`、`icon.png` 及 README 图标采用维护者于 2026-10-28 确认的原创 KARI 字形和对齐格纹，替代此前占位图标。图形与商标权利保留。
 
 `App/AppIcon.icon`, `icon.png`, and the README icon use the original KARI letterform and aligned grid approved by the maintainer on 2026-10-28, replacing the former placeholder. Artwork and trademark rights are reserved.
+
+## Memory library (1.4.0)
+
+- ZIPFoundation 0.9.20: https://github.com/weichsel/ZIPFoundation — MIT, resolved through SwiftPM.
+- llama.cpp b11998 / `78feec062d50ec9e8940244cac918ac4480b60cb`: https://github.com/ggml-org/llama.cpp — MIT; notice in `licenses/LLAMA-LICENSE`. Build with `npm run build:embedding`; generated frameworks are ignored.
+- Embedding weights are downloaded only on request. Each pinned artifact, checksum, source and license is listed in `Native/Sources/KariNative/Resources/Models/embedding-catalog.json`; no embedding weights are bundled.

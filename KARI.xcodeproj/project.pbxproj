@@ -5,45 +5,35 @@
 	"objectVersion" = "60";
 	"archiveVersion" = "1";
 	"objects" = {
-		"4B41524949434F4E30303031" = {
-			"isa" = "PBXFileReference";
-			"lastKnownFileType" = "folder.iconcomposer";
-			"path" = "AppIcon.icon";
-			"sourceTree" = "<group>";
-		};
-		"4B41524949434F4E30303032" = {
-			"isa" = "PBXBuildFile";
-			"fileRef" = "4B41524949434F4E30303031";
-		};
 		"DFE23F3EDE0CCD2CD01DBF5A" = {
 			"isa" = "XCConfigurationList";
+			"defaultConfigurationIsVisible" = "0";
+			"defaultConfigurationName" = "Debug";
 			"buildConfigurations" = (
 				"1E7962CF9DA41D7CD4FCEF93",
 				"5F4683F84A39A1EE6DCCC882",
 			);
-			"defaultConfigurationIsVisible" = "0";
-			"defaultConfigurationName" = "Debug";
 		};
 		"1F5A12435A5633F198C1AAB3" = {
-			"isa" = "XCBuildConfiguration";
 			"baseConfigurationReference" = "AABBCCDDEEFF001122334455";
+			"isa" = "XCBuildConfiguration";
 			"buildSettings" = {
-				"CODE_SIGN_STYLE" = "Automatic";
-				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUITests";
-				"PRODUCT_NAME" = "$(TARGET_NAME)";
-				"GENERATE_INFOPLIST_FILE" = "YES";
-				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
-				"SDKROOT" = "iphoneos";
-				"SWIFT_VERSION" = "5.0";
-				"TARGETED_DEVICE_FAMILY" = "1,2";
 				"LD_RUNPATH_SEARCH_PATHS" = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
-				"ENABLE_TESTABILITY" = "YES";
 				"TEST_TARGET_NAME" = "KARI";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"ENABLE_TESTABILITY" = "YES";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"SDKROOT" = "iphoneos";
+				"SWIFT_VERSION" = "5.0";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUITests";
 			};
 			"name" = "Release";
 		};
@@ -51,6 +41,10 @@
 			"isa" = "PBXTargetDependency";
 			"target" = "504EC3031FED79650016851F";
 			"targetProxy" = "A49BFBAC697D02814AA7A31C";
+		};
+		"C47A23D4D17BAA4AA5B7AEE8" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "89E6A10D00FF76ED9B3E90B0";
 		};
 		"AABBCCDDEEFF001122334458" = {
 			"path" = "en.lproj/InfoPlist.strings";
@@ -86,22 +80,42 @@
 			);
 			"runOnlyForDeploymentPostprocessing" = "0";
 		};
+		"5EB029555A8D69852768E55F" = {
+			"baseConfigurationReference" = "AABBCCDDEEFF001122334455";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"TEST_TARGET_NAME" = "KARI";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"ENABLE_TESTABILITY" = "YES";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"SDKROOT" = "iphoneos";
+				"SWIFT_VERSION" = "5.0";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUITests";
+			};
+			"name" = "Debug";
+		};
+		"835F9429112F9B626A79E96A" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+				"7A6F2A1DBD0C8B70BE7E21B1",
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
 		"0B775A510821C5D76A09D72E" = {
 			"path" = "Tests/device-native/burger.jpg";
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "image.jpeg";
 			"sourceTree" = "SOURCE_ROOT";
-		};
-		"3E5774F9BB707C2DC0B05106" = {
-			"isa" = "PBXBuildFile";
-			"fileRef" = "789C057DF5F4AA24A30DB126";
-		};
-		"59994999A9EAF71AC71B01EC" = {
-			"isa" = "PBXFileReference";
-			"explicitFileType" = "wrapper.cfbundle";
-			"includeInIndex" = "0";
-			"path" = "KariUITests.xctest";
-			"sourceTree" = "BUILT_PRODUCTS_DIR";
 		};
 		"1467346C976AAE2FEA7DFE52" = {
 			"isa" = "PBXBuildFile";
@@ -124,36 +138,16 @@
 			"remoteInfo" = "App";
 			"proxyType" = "1";
 		};
-		"835F9429112F9B626A79E96A" = {
-			"isa" = "PBXSourcesBuildPhase";
-			"buildActionMask" = "2147483647";
-			"files" = (
-				"7A6F2A1DBD0C8B70BE7E21B1",
-			);
-			"runOnlyForDeploymentPostprocessing" = "0";
+		"3E5774F9BB707C2DC0B05106" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "789C057DF5F4AA24A30DB126";
 		};
-		"5EB029555A8D69852768E55F" = {
-			"isa" = "XCBuildConfiguration";
-			"baseConfigurationReference" = "AABBCCDDEEFF001122334455";
-			"buildSettings" = {
-				"CODE_SIGN_STYLE" = "Automatic";
-				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUITests";
-				"PRODUCT_NAME" = "$(TARGET_NAME)";
-				"GENERATE_INFOPLIST_FILE" = "YES";
-				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
-				"SDKROOT" = "iphoneos";
-				"SWIFT_VERSION" = "5.0";
-				"TARGETED_DEVICE_FAMILY" = "1,2";
-				"LD_RUNPATH_SEARCH_PATHS" = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
-				"ENABLE_TESTABILITY" = "YES";
-				"TEST_TARGET_NAME" = "KARI";
-			};
-			"name" = "Debug";
+		"59994999A9EAF71AC71B01EC" = {
+			"path" = "KariUITests.xctest";
+			"isa" = "PBXFileReference";
+			"includeInIndex" = "0";
+			"explicitFileType" = "wrapper.cfbundle";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
 		};
 		"BE7CF59BF5A7BF81E5260830" = {
 			"isa" = "PBXResourcesBuildPhase";
@@ -163,15 +157,19 @@
 			"runOnlyForDeploymentPostprocessing" = "0";
 		};
 		"212F98AAE7C36B926341F9F1" = {
+			"path" = "Tests/device-native/KariUITests.swift";
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "sourcecode.swift";
-			"path" = "Tests/device-native/KariUITests.swift";
 			"sourceTree" = "SOURCE_ROOT";
 		};
+		"4B41524949434F4E30303032" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "4B41524949434F4E30303031";
+		};
 		"A886001DF43C57CBA20825E5" = {
+			"path" = "Tests/device-native/NativeRegressionTests.swift";
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "sourcecode.swift";
-			"path" = "Tests/device-native/NativeRegressionTests.swift";
 			"sourceTree" = "SOURCE_ROOT";
 		};
 		"EE4E1A6F7B81E04B0C889744" = {
@@ -208,16 +206,16 @@
 					"@executable_path/Frameworks",
 				);
 				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG";
-				"MARKETING_VERSION" = "1.3.0";
+				"MARKETING_VERSION" = "1.4.0";
 				"INFOPLIST_FILE" = "App/Info.plist";
 				"TARGETED_DEVICE_FAMILY" = "1,2";
 				"CODE_SIGN_STYLE" = "Automatic";
 				"ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon";
 				"SWIFT_VERSION" = "5.0";
 				"PRODUCT_NAME" = "KARI";
-				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios";
+				"CURRENT_PROJECT_VERSION" = "16";
 				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
-				"CURRENT_PROJECT_VERSION" = "14";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios";
 			};
 			"name" = "Debug";
 		};
@@ -230,16 +228,16 @@
 					"@executable_path/Frameworks",
 				);
 				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "";
-				"MARKETING_VERSION" = "1.3.0";
+				"MARKETING_VERSION" = "1.4.0";
 				"INFOPLIST_FILE" = "App/Info.plist";
 				"TARGETED_DEVICE_FAMILY" = "1,2";
 				"CODE_SIGN_STYLE" = "Automatic";
 				"ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon";
 				"SWIFT_VERSION" = "5.0";
 				"PRODUCT_NAME" = "KARI";
-				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios";
+				"CURRENT_PROJECT_VERSION" = "16";
 				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
-				"CURRENT_PROJECT_VERSION" = "14";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios";
 			};
 			"name" = "Release";
 		};
@@ -268,10 +266,10 @@
 			"fileRef" = "FA2B301B4D138ECF570C455C";
 		};
 		"711B5FA7D81D1614EBEB3F55" = {
-			"isa" = "PBXFileReference";
-			"explicitFileType" = "wrapper.cfbundle";
-			"includeInIndex" = "0";
 			"path" = "KariUnitTests.xctest";
+			"isa" = "PBXFileReference";
+			"includeInIndex" = "0";
+			"explicitFileType" = "wrapper.cfbundle";
 			"sourceTree" = "BUILT_PRODUCTS_DIR";
 		};
 		"CDAC7B591695B04D4B71FC01" = {
@@ -301,9 +299,9 @@
 				"GENERATE_INFOPLIST_FILE" = "YES";
 				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
 				"CODE_SIGN_STYLE" = "Automatic";
-				"PRODUCT_NAME" = "$(TARGET_NAME)";
 				"SDKROOT" = "iphoneos";
 				"SWIFT_VERSION" = "5.0";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
 				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
 				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUnitTests";
 			};
@@ -322,24 +320,30 @@
 			);
 			"runOnlyForDeploymentPostprocessing" = "0";
 		};
+		"4B41524949434F4E30303031" = {
+			"path" = "AppIcon.icon";
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "folder.iconcomposer";
+			"sourceTree" = "<group>";
+		};
 		"66252F4C50AD6F76FAD42651" = {
-			"isa" = "PBXNativeTarget";
 			"buildConfigurationList" = "DFE23F3EDE0CCD2CD01DBF5A";
+			"productReference" = "711B5FA7D81D1614EBEB3F55";
+			"productType" = "com.apple.product-type.bundle.unit-test";
+			"packageProductDependencies" = (
+			);
+			"productName" = "KariUnitTests";
+			"isa" = "PBXNativeTarget";
 			"buildPhases" = (
 				"0B8D152101A83E87BCC926CB",
 				"7FDFFD2A32E271F61618012B",
 				"44D156353E5D945879029AFF",
 			);
-			"buildRules" = (
-			);
 			"dependencies" = (
 				"C4FB69F9C9226594829EF70C",
 			);
 			"name" = "KariUnitTests";
-			"productName" = "KariUnitTests";
-			"productReference" = "711B5FA7D81D1614EBEB3F55";
-			"productType" = "com.apple.product-type.bundle.unit-test";
-			"packageProductDependencies" = (
+			"buildRules" = (
 			);
 		};
 		"1522C9644AB474B9878B0769" = {
@@ -358,16 +362,16 @@
 		"2417399303B599A666946DB0" = {
 			"isa" = "PBXContainerItemProxy";
 			"containerPortal" = "504EC2FC1FED79650016851F";
-			"proxyType" = "1";
 			"remoteGlobalIDString" = "504EC3031FED79650016851F";
 			"remoteInfo" = "App";
+			"proxyType" = "1";
 		};
 		"419FA2616B4D00ECCF67DB9F" = {
 			"isa" = "PBXContainerItemProxy";
 			"containerPortal" = "504EC2FC1FED79650016851F";
-			"proxyType" = "1";
 			"remoteGlobalIDString" = "504EC3031FED79650016851F";
 			"remoteInfo" = "App";
+			"proxyType" = "1";
 		};
 		"7FDFFD2A32E271F61618012B" = {
 			"isa" = "PBXFrameworksBuildPhase";
@@ -377,9 +381,9 @@
 			"runOnlyForDeploymentPostprocessing" = "0";
 		};
 		"8B8C10628FDD2008A59F6A04" = {
+			"path" = "Tests/device-native/SessionRegressionTests.swift";
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "sourcecode.swift";
-			"path" = "Tests/device-native/SessionRegressionTests.swift";
 			"sourceTree" = "SOURCE_ROOT";
 		};
 		"504EC3151FED79650016851F" = {
@@ -392,10 +396,10 @@
 				"CLANG_CXX_LIBRARY" = "libc++";
 				"CLANG_WARN__DUPLICATE_METHOD_MATCH" = "YES";
 				"SWIFT_COMPILATION_MODE" = "wholemodule";
-				"ENABLE_NS_ASSERTIONS" = "NO";
+				"CLANG_WARN_OBJC_LITERAL_CONVERSION" = "YES";
 				"CLANG_WARN_INFINITE_RECURSION" = "YES";
-				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
-				"GCC_WARN_UNDECLARED_SELECTOR" = "YES";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"CLANG_WARN_DOCUMENTATION_COMMENTS" = "YES";
 				"CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION" = "YES_AGGRESSIVE";
 				"SDKROOT" = "iphoneos";
 				"CLANG_CXX_LANGUAGE_STANDARD" = "gnu++14";
@@ -427,9 +431,9 @@
 				"CLANG_WARN_NON_LITERAL_NULL_CONVERSION" = "YES";
 				"VALIDATE_PRODUCT" = "YES";
 				"GCC_WARN_UNUSED_FUNCTION" = "YES";
-				"CLANG_WARN_OBJC_LITERAL_CONVERSION" = "YES";
-				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
-				"CLANG_WARN_DOCUMENTATION_COMMENTS" = "YES";
+				"ENABLE_NS_ASSERTIONS" = "NO";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
+				"GCC_WARN_UNDECLARED_SELECTOR" = "YES";
 			};
 			"name" = "Release";
 		};
@@ -444,6 +448,7 @@
 		};
 		"6F199788ED485C76FD54751C" = {
 			"isa" = "PBXGroup";
+			"name" = "Device tests";
 			"children" = (
 				"89E6A10D00FF76ED9B3E90B0",
 				"134F206D908C78DF03333190",
@@ -454,7 +459,6 @@
 				"B1397965A65908F86590B1B4",
 				"212F98AAE7C36B926341F9F1",
 			);
-			"name" = "Device tests";
 			"sourceTree" = "<group>";
 		};
 		"E2EE74FD2EE4498E36736248" = {
@@ -494,15 +498,15 @@
 			);
 		};
 		"5B122ABA569979B4CFF114E3" = {
+			"path" = "Tests/device-native/DeviceRuntimeTests.swift";
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "sourcecode.swift";
-			"path" = "Tests/device-native/DeviceRuntimeTests.swift";
 			"sourceTree" = "SOURCE_ROOT";
 		};
 		"B47E2E3C5F5F58337D48C87C" = {
+			"path" = "Tests/device-native/RemoteRegressionTests.swift";
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "sourcecode.swift";
-			"path" = "Tests/device-native/RemoteRegressionTests.swift";
 			"sourceTree" = "SOURCE_ROOT";
 		};
 		"F0E51FE9B008D43F06FE767B" = {
@@ -514,23 +518,23 @@
 			"runOnlyForDeploymentPostprocessing" = "0";
 		};
 		"0CBFD4BF5B2706DDF3C42F48" = {
-			"isa" = "PBXNativeTarget";
 			"buildConfigurationList" = "8819DC15B3501A4C733E1455";
+			"productReference" = "59994999A9EAF71AC71B01EC";
+			"productType" = "com.apple.product-type.bundle.ui-testing";
+			"packageProductDependencies" = (
+			);
+			"productName" = "KariUITests";
+			"isa" = "PBXNativeTarget";
 			"buildPhases" = (
 				"835F9429112F9B626A79E96A",
 				"F916C6215BF70951054A5903",
 				"CE2E82448B77B34848CC884F",
 			);
-			"buildRules" = (
-			);
 			"dependencies" = (
 				"E02F5B73EF47F54860617CD0",
 			);
 			"name" = "KariUITests";
-			"productName" = "KariUITests";
-			"productReference" = "59994999A9EAF71AC71B01EC";
-			"productType" = "com.apple.product-type.bundle.ui-testing";
-			"packageProductDependencies" = (
+			"buildRules" = (
 			);
 		};
 		"B3592F216A8AE61B4E9F3198" = {
@@ -553,10 +557,10 @@
 				"CLANG_WARN_SUSPICIOUS_MOVE" = "YES";
 				"CLANG_ENABLE_OBJC_ARC" = "YES";
 				"CLANG_WARN_DIRECT_OBJC_ISA_USAGE" = "YES_ERROR";
-				"CLANG_WARN_OBJC_LITERAL_CONVERSION" = "YES";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
 				"CLANG_WARN__DUPLICATE_METHOD_MATCH" = "YES";
-				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
-				"CLANG_CXX_LIBRARY" = "libc++";
+				"CLANG_WARN_DOCUMENTATION_COMMENTS" = "YES";
+				"GCC_WARN_UNDECLARED_SELECTOR" = "YES";
 				"CLANG_WARN_INFINITE_RECURSION" = "YES";
 				"CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION" = "YES_AGGRESSIVE";
 				"SDKROOT" = "iphoneos";
@@ -580,8 +584,8 @@
 				"GCC_WARN_ABOUT_RETURN_TYPE" = "YES_ERROR";
 				"CLANG_WARN_COMMA" = "YES";
 				"GCC_DYNAMIC_NO_PIC" = "NO";
-				"GCC_WARN_UNUSED_VARIABLE" = "YES";
 				"GCC_C_LANGUAGE_STANDARD" = "gnu11";
+				"GCC_WARN_UNUSED_VARIABLE" = "YES";
 				"CLANG_WARN_RANGE_LOOP_ANALYSIS" = "YES";
 				"CLANG_ENABLE_MODULES" = "YES";
 				"CLANG_WARN_INT_CONVERSION" = "YES";
@@ -597,9 +601,9 @@
 				"CLANG_WARN_NON_LITERAL_NULL_CONVERSION" = "YES";
 				"GCC_WARN_UNUSED_FUNCTION" = "YES";
 				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG";
-				"DEBUG_INFORMATION_FORMAT" = "dwarf";
-				"CLANG_WARN_DOCUMENTATION_COMMENTS" = "YES";
-				"GCC_WARN_UNDECLARED_SELECTOR" = "YES";
+				"CLANG_WARN_OBJC_LITERAL_CONVERSION" = "YES";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
+				"CLANG_CXX_LIBRARY" = "libc++";
 			};
 			"name" = "Debug";
 		};
@@ -608,9 +612,9 @@
 			"fileRef" = "504EC3101FED79650016851F";
 		};
 		"134F206D908C78DF03333190" = {
+			"path" = "Tests/device-native/FeaturePolicyTests.swift";
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "sourcecode.swift";
-			"path" = "Tests/device-native/FeaturePolicyTests.swift";
 			"sourceTree" = "SOURCE_ROOT";
 		};
 		"177804002B6A635D4353F000" = {
@@ -626,15 +630,15 @@
 			"isa" = "PBXBuildFile";
 			"productRef" = "4D22ABE82AF431CB00220026";
 		};
-		"4D22ABE82AF431CB00220026" = {
-			"isa" = "XCSwiftPackageProductDependency";
-			"package" = "D4C12C0A2AAA248700AAC8A2";
-			"productName" = "KariNative";
-		};
 		"E02F5B73EF47F54860617CD0" = {
 			"isa" = "PBXTargetDependency";
 			"target" = "504EC3031FED79650016851F";
 			"targetProxy" = "2417399303B599A666946DB0";
+		};
+		"4D22ABE82AF431CB00220026" = {
+			"isa" = "XCSwiftPackageProductDependency";
+			"package" = "D4C12C0A2AAA248700AAC8A2";
+			"productName" = "KariNative";
 		};
 		"AABBCCDDEEFF001122334455" = {
 			"path" = "Config/Project.xcconfig";
@@ -658,9 +662,9 @@
 			"sourceTree" = "<group>";
 		};
 		"B1397965A65908F86590B1B4" = {
+			"path" = "Tests/device-native/burger.jpg";
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "image.jpeg";
-			"path" = "Tests/device-native/burger.jpg";
 			"sourceTree" = "SOURCE_ROOT";
 		};
 		"504EC2FF1FED79650016851F" = {
@@ -703,40 +707,40 @@
 				"GENERATE_INFOPLIST_FILE" = "YES";
 				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
 				"CODE_SIGN_STYLE" = "Automatic";
-				"PRODUCT_NAME" = "$(TARGET_NAME)";
 				"SDKROOT" = "iphoneos";
 				"SWIFT_VERSION" = "5.0";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
 				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUITests";
 				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
 			};
 			"name" = "Release";
 		};
 		"1E7962CF9DA41D7CD4FCEF93" = {
-			"isa" = "XCBuildConfiguration";
 			"baseConfigurationReference" = "AABBCCDDEEFF001122334455";
+			"isa" = "XCBuildConfiguration";
 			"buildSettings" = {
-				"CODE_SIGN_STYLE" = "Automatic";
-				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUnitTests";
-				"PRODUCT_NAME" = "$(TARGET_NAME)";
-				"GENERATE_INFOPLIST_FILE" = "YES";
-				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
-				"SDKROOT" = "iphoneos";
-				"SWIFT_VERSION" = "5.0";
-				"TARGETED_DEVICE_FAMILY" = "1,2";
 				"LD_RUNPATH_SEARCH_PATHS" = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
-				"ENABLE_TESTABILITY" = "YES";
-				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/KARI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KARI";
 				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/KARI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KARI";
+				"ENABLE_TESTABILITY" = "YES";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"SDKROOT" = "iphoneos";
+				"SWIFT_VERSION" = "5.0";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUnitTests";
 			};
 			"name" = "Debug";
 		};
-		"FB1582EF62A0DA869DCDD756" = {
-			"isa" = "PBXFrameworksBuildPhase";
+		"CE2E82448B77B34848CC884F" = {
+			"isa" = "PBXResourcesBuildPhase";
 			"buildActionMask" = "2147483647";
 			"files" = (
 			);
@@ -768,33 +772,16 @@
 			"buildRules" = (
 			);
 		};
+		"FB1582EF62A0DA869DCDD756" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
 		"504EC30F1FED79650016851F" = {
 			"isa" = "PBXBuildFile";
 			"fileRef" = "504EC30E1FED79650016851F";
-		};
-		"5F4683F84A39A1EE6DCCC882" = {
-			"isa" = "XCBuildConfiguration";
-			"baseConfigurationReference" = "AABBCCDDEEFF001122334455";
-			"buildSettings" = {
-				"CODE_SIGN_STYLE" = "Automatic";
-				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUnitTests";
-				"PRODUCT_NAME" = "$(TARGET_NAME)";
-				"GENERATE_INFOPLIST_FILE" = "YES";
-				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
-				"SDKROOT" = "iphoneos";
-				"SWIFT_VERSION" = "5.0";
-				"TARGETED_DEVICE_FAMILY" = "1,2";
-				"LD_RUNPATH_SEARCH_PATHS" = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
-				"ENABLE_TESTABILITY" = "YES";
-				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/KARI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KARI";
-				"BUNDLE_LOADER" = "$(TEST_HOST)";
-			};
-			"name" = "Release";
 		};
 		"93E0BB13E354B9B3C0DC11FD" = {
 			"isa" = "PBXBuildFile";
@@ -808,12 +795,35 @@
 			"isa" = "PBXBuildFile";
 			"fileRef" = "6E6A56E5F0F9C172F39677BA";
 		};
-		"CE2E82448B77B34848CC884F" = {
-			"isa" = "PBXResourcesBuildPhase";
-			"buildActionMask" = "2147483647";
-			"files" = (
-			);
-			"runOnlyForDeploymentPostprocessing" = "0";
+		"5F4683F84A39A1EE6DCCC882" = {
+			"baseConfigurationReference" = "AABBCCDDEEFF001122334455";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/KARI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KARI";
+				"ENABLE_TESTABILITY" = "YES";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"SDKROOT" = "iphoneos";
+				"SWIFT_VERSION" = "5.0";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUnitTests";
+			};
+			"name" = "Release";
+		};
+		"89E6A10D00FF76ED9B3E90B0" = {
+			"path" = "Tests/device-native/LifeWakeTests.swift";
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
 		};
 		"1B966945C403764AD7C06679" = {
 			"isa" = "PBXContainerItemProxy";
@@ -829,12 +839,12 @@
 		};
 		"8819DC15B3501A4C733E1455" = {
 			"isa" = "XCConfigurationList";
+			"defaultConfigurationIsVisible" = "0";
+			"defaultConfigurationName" = "Debug";
 			"buildConfigurations" = (
 				"5EB029555A8D69852768E55F",
 				"1F5A12435A5633F198C1AAB3",
 			);
-			"defaultConfigurationIsVisible" = "0";
-			"defaultConfigurationName" = "Debug";
 		};
 		"BF637166EC955C6B57505762" = {
 			"isa" = "PBXBuildFile";
@@ -849,6 +859,8 @@
 				"B3592F216A8AE61B4E9F3198",
 				"711B5FA7D81D1614EBEB3F55",
 				"59994999A9EAF71AC71B01EC",
+				"AAF634BFC64E21FA89A97DFB",
+				"BA5306EBDDC2CB0CF3450010",
 			);
 			"sourceTree" = "<group>";
 		};
@@ -891,9 +903,9 @@
 				"GENERATE_INFOPLIST_FILE" = "YES";
 				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
 				"CODE_SIGN_STYLE" = "Automatic";
-				"PRODUCT_NAME" = "$(TARGET_NAME)";
 				"SDKROOT" = "iphoneos";
 				"SWIFT_VERSION" = "5.0";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
 				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
 				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUnitTests";
 			};
@@ -935,6 +947,8 @@
 				"397A5B53D70A55AC4ADC1411",
 				"66252F4C50AD6F76FAD42651",
 				"0CBFD4BF5B2706DDF3C42F48",
+				"D07C15104AE90302921D1EF3",
+				"4DB01577D355B608C992A456",
 			);
 			"developmentRegion" = "en";
 			"knownRegions" = (
@@ -950,10 +964,10 @@
 				"LastSwiftUpdateCheck" = "0920";
 				"LastUpgradeCheck" = "0920";
 				"TargetAttributes" = {
-					"0CBFD4BF5B2706DDF3C42F48" = {
-						"CreatedOnToolsVersion" = "26.0";
+					"66252F4C50AD6F76FAD42651" = {
 						"TestTargetID" = "504EC3031FED79650016851F";
 						"ProvisioningStyle" = "Automatic";
+						"CreatedOnToolsVersion" = "26.0";
 					};
 					"504EC3031FED79650016851F" = {
 						"LastSwiftMigration" = "1100";
@@ -965,12 +979,22 @@
 						"ProvisioningStyle" = "Automatic";
 						"CreatedOnToolsVersion" = "26.0";
 					};
+					"0CBFD4BF5B2706DDF3C42F48" = {
+						"TestTargetID" = "504EC3031FED79650016851F";
+						"ProvisioningStyle" = "Automatic";
+						"CreatedOnToolsVersion" = "26.0";
+					};
 					"397A5B53D70A55AC4ADC1411" = {
 						"TestTargetID" = "504EC3031FED79650016851F";
 						"ProvisioningStyle" = "Automatic";
 						"CreatedOnToolsVersion" = "26.0";
 					};
-					"66252F4C50AD6F76FAD42651" = {
+					"D07C15104AE90302921D1EF3" = {
+						"CreatedOnToolsVersion" = "26.0";
+						"TestTargetID" = "504EC3031FED79650016851F";
+						"ProvisioningStyle" = "Automatic";
+					};
+					"4DB01577D355B608C992A456" = {
 						"CreatedOnToolsVersion" = "26.0";
 						"TestTargetID" = "504EC3031FED79650016851F";
 						"ProvisioningStyle" = "Automatic";
@@ -990,6 +1014,7 @@
 				"504EC3051FED79650016851F",
 				"851C9ABBBF694DF2C1ABE5B7",
 				"6F199788ED485C76FD54751C",
+				"07D626C5410C35C30ADB1754",
 			);
 		};
 		"851C9ABBBF694DF2C1ABE5B7" = {
@@ -1075,23 +1100,360 @@
 				"GENERATE_INFOPLIST_FILE" = "YES";
 				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
 				"CODE_SIGN_STYLE" = "Automatic";
-				"PRODUCT_NAME" = "$(TARGET_NAME)";
 				"SDKROOT" = "iphoneos";
 				"SWIFT_VERSION" = "5.0";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
 				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUITests";
 				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
 			};
 			"name" = "Debug";
 		};
-		"89E6A10D00FF76ED9B3E90B0" = {
+		"AAF634BFC64E21FA89A97DFB" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"includeInIndex" = "0";
+			"path" = "KariUnitTests.xctest";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"D299D480DBF19692BF4A11C9" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Tests/device-native/MemoryRegressionTests.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"2F9463A5C1F1615C9C348F16" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "D299D480DBF19692BF4A11C9";
+		};
+		"9165829D2668527624C2AE3F" = {
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "sourcecode.swift";
 			"path" = "Tests/device-native/LifeWakeTests.swift";
 			"sourceTree" = "SOURCE_ROOT";
 		};
-		"C47A23D4D17BAA4AA5B7AEE8" = {
+		"01052DCD5490ABB774B1AD25" = {
 			"isa" = "PBXBuildFile";
-			"fileRef" = "89E6A10D00FF76ED9B3E90B0";
+			"fileRef" = "9165829D2668527624C2AE3F";
+		};
+		"1998DFA195D54E66744DE3A5" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Tests/device-native/FeaturePolicyTests.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"B91A9620B3AFF38A1896E5C1" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "1998DFA195D54E66744DE3A5";
+		};
+		"91CC9C2720307917C7628CDB" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Tests/device-native/DeviceRuntimeTests.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"C38F8BA75AE8C08C13BFA300" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "91CC9C2720307917C7628CDB";
+		};
+		"504A5E65D7949A067BAE3B2D" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Tests/device-native/NativeRegressionTests.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"E00BD05B4B2D00141A0AB778" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "504A5E65D7949A067BAE3B2D";
+		};
+		"B0212BFDED09270F9BF21620" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Tests/device-native/RemoteRegressionTests.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"4EA93A763BC4C15752502291" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "B0212BFDED09270F9BF21620";
+		};
+		"F058C8CC02CD5D37E39476A3" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Tests/device-native/SessionRegressionTests.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"22D0700FE3B15B2A772E075B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F058C8CC02CD5D37E39476A3";
+		};
+		"80895C7E79C836EE4B6206C4" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "image.jpeg";
+			"path" = "Tests/device-native/burger.jpg";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"4927009CBD2EC366FF7C7876" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "80895C7E79C836EE4B6206C4";
+		};
+		"A4205044732814B65A0286B9" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+				"2F9463A5C1F1615C9C348F16",
+				"01052DCD5490ABB774B1AD25",
+				"B91A9620B3AFF38A1896E5C1",
+				"C38F8BA75AE8C08C13BFA300",
+				"E00BD05B4B2D00141A0AB778",
+				"4EA93A763BC4C15752502291",
+				"22D0700FE3B15B2A772E075B",
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"2469B04EBB0357399E7C234D" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+				"4927009CBD2EC366FF7C7876",
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"E2105FC15C08FF31CC6AF1D7" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"E49C9BC0923A086875272D9F" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "504EC2FC1FED79650016851F";
+			"proxyType" = "1";
+			"remoteGlobalIDString" = "504EC3031FED79650016851F";
+			"remoteInfo" = "App";
+		};
+		"275B71B1BA1C26A04ACB80EF" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "504EC3031FED79650016851F";
+			"targetProxy" = "E49C9BC0923A086875272D9F";
+		};
+		"6181C60BFDDE7AA99B4FE703" = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = "AABBCCDDEEFF001122334455";
+			"buildSettings" = {
+				"CODE_SIGN_STYLE" = "Automatic";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUnitTests";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
+				"SDKROOT" = "iphoneos";
+				"SWIFT_VERSION" = "5.0";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"ENABLE_TESTABILITY" = "YES";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/KARI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KARI";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+			};
+			"name" = "Debug";
+		};
+		"7D3F8D062BF9805DEE235A17" = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = "AABBCCDDEEFF001122334455";
+			"buildSettings" = {
+				"CODE_SIGN_STYLE" = "Automatic";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUnitTests";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
+				"SDKROOT" = "iphoneos";
+				"SWIFT_VERSION" = "5.0";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"ENABLE_TESTABILITY" = "YES";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/KARI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KARI";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+			};
+			"name" = "Release";
+		};
+		"72DEE7F0E896F56466797156" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"6181C60BFDDE7AA99B4FE703",
+				"7D3F8D062BF9805DEE235A17",
+			);
+			"defaultConfigurationIsVisible" = "0";
+			"defaultConfigurationName" = "Debug";
+		};
+		"D07C15104AE90302921D1EF3" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "72DEE7F0E896F56466797156";
+			"buildPhases" = (
+				"A4205044732814B65A0286B9",
+				"E2105FC15C08FF31CC6AF1D7",
+				"2469B04EBB0357399E7C234D",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+				"275B71B1BA1C26A04ACB80EF",
+			);
+			"name" = "KariUnitTests";
+			"productName" = "KariUnitTests";
+			"productReference" = "AAF634BFC64E21FA89A97DFB";
+			"productType" = "com.apple.product-type.bundle.unit-test";
+			"packageProductDependencies" = (
+			);
+		};
+		"BA5306EBDDC2CB0CF3450010" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"includeInIndex" = "0";
+			"path" = "KariUITests.xctest";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"D8490DB78F1274708224D113" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Tests/device-native/KariUITests.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"B580AA259775DDE25995DFC5" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "D8490DB78F1274708224D113";
+		};
+		"251F7C83862D968DA4E7A966" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+				"B580AA259775DDE25995DFC5",
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"54712D204F883C62DF2730D0" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"B620B8701EB235E4908A0F68" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"E27DECE775FFB144F2EFE4E3" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "504EC2FC1FED79650016851F";
+			"proxyType" = "1";
+			"remoteGlobalIDString" = "504EC3031FED79650016851F";
+			"remoteInfo" = "App";
+		};
+		"C58A3FB51564805B66219FE8" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "504EC3031FED79650016851F";
+			"targetProxy" = "E27DECE775FFB144F2EFE4E3";
+		};
+		"3CC56A45301CC8FBC5B4F05A" = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = "AABBCCDDEEFF001122334455";
+			"buildSettings" = {
+				"CODE_SIGN_STYLE" = "Automatic";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUITests";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
+				"SDKROOT" = "iphoneos";
+				"SWIFT_VERSION" = "5.0";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"ENABLE_TESTABILITY" = "YES";
+				"TEST_TARGET_NAME" = "KARI";
+			};
+			"name" = "Debug";
+		};
+		"8258DECAF1723E0E506277E4" = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = "AABBCCDDEEFF001122334455";
+			"buildSettings" = {
+				"CODE_SIGN_STYLE" = "Automatic";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "org.example.kari.ios.KariUITests";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "15.0";
+				"SDKROOT" = "iphoneos";
+				"SWIFT_VERSION" = "5.0";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"ENABLE_TESTABILITY" = "YES";
+				"TEST_TARGET_NAME" = "KARI";
+			};
+			"name" = "Release";
+		};
+		"7B4B4725072434F7991D8082" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"3CC56A45301CC8FBC5B4F05A",
+				"8258DECAF1723E0E506277E4",
+			);
+			"defaultConfigurationIsVisible" = "0";
+			"defaultConfigurationName" = "Debug";
+		};
+		"4DB01577D355B608C992A456" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "7B4B4725072434F7991D8082";
+			"buildPhases" = (
+				"251F7C83862D968DA4E7A966",
+				"B620B8701EB235E4908A0F68",
+				"54712D204F883C62DF2730D0",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+				"C58A3FB51564805B66219FE8",
+			);
+			"name" = "KariUITests";
+			"productName" = "KariUITests";
+			"productReference" = "BA5306EBDDC2CB0CF3450010";
+			"productType" = "com.apple.product-type.bundle.ui-testing";
+			"packageProductDependencies" = (
+			);
+		};
+		"07D626C5410C35C30ADB1754" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"D299D480DBF19692BF4A11C9",
+				"9165829D2668527624C2AE3F",
+				"1998DFA195D54E66744DE3A5",
+				"91CC9C2720307917C7628CDB",
+				"504A5E65D7949A067BAE3B2D",
+				"B0212BFDED09270F9BF21620",
+				"F058C8CC02CD5D37E39476A3",
+				"80895C7E79C836EE4B6206C4",
+				"D8490DB78F1274708224D113",
+			);
+			"name" = "Device tests";
+			"sourceTree" = "<group>";
 		};
 	};
 	"rootObject" = "504EC2FC1FED79650016851F";

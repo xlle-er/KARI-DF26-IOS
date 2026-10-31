@@ -20,10 +20,11 @@ struct KariDeviceManagement: View {
     @State private var confirmingWiring = false
     @AppStorage("kari.ota.preview") private var preview = false
     @AppStorage("kari.ota.close") private var closeHotspot = true
+    private let vision: AnyView?
     private let embedded: Bool
     private let connect: (() -> Void)?
     private let remote: (() -> Void)?
-    init(robot: KariBluetooth, wifi: KariDeviceWifi, embedded: Bool = false, connect: (() -> Void)? = nil, remote: (() -> Void)? = nil) { self.embedded = embedded; self.connect = connect; self.remote = remote; self.robot = robot; self.wifi = wifi; self.session = robot.management }
+    init(robot: KariBluetooth, wifi: KariDeviceWifi, embedded: Bool = false, connect: (() -> Void)? = nil, remote: (() -> Void)? = nil, vision: AnyView? = nil) { self.vision = vision; self.embedded = embedded; self.connect = connect; self.remote = remote; self.robot = robot; self.wifi = wifi; self.session = robot.management }
     var body: some View {
         NavigationView {
             Form {
@@ -34,15 +35,15 @@ struct KariDeviceManagement: View {
                     }.listRowInsets(EdgeInsets()).listRowBackground(Color.clear)
                 }
                 Picker(L("调试机器人"), selection: $tab) {
-                    Text(L("马达测试")).tag(0); Text(L("配网")).tag(1); Text("OTA").tag(2)
+                    Text(L("马达测试")).tag(0); Text(L("视觉")).tag(1); Text(L("网络及OTA")).tag(2)
                 }.pickerStyle(.segmented).disabled(session.busy)
                 motionStatus
                 if !robot.isConnected { Button(L("连接机器人")) { connect?() }.accessibilityIdentifier("connectFromRobot") }
                 Group {
                     if tab == 0 { motors.disabled(session.needsWiringConfiguration) }
-                    if tab == 1 { network }
-                    if tab == 2 { ota }
+                    if tab == 2 { network; ota }
                 }.disabled(session.busy || !robot.isConnected)
+                if tab == 1, let vision { vision.listRowInsets(EdgeInsets()).listRowBackground(Color.clear) }
                 if session.busy { KariOTAProgress(value: session.progress, label: session.progressLabel) }
                 if !session.message.isEmpty { Text(LM(session.message)).font(.footnote).accessibilityIdentifier("device-management-status") }
                 NavigationLink(L("管理设置")) { managementSettings }.accessibilityIdentifier("robotManagementSettings")

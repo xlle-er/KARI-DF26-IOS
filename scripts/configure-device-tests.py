@@ -9,13 +9,10 @@ def uid(name):return hashlib.sha1(('kari.public.tests.'+name).encode()).hexdiges
 def add(name,obj):key=uid(name);objects[key]=obj;return key
 config=objects['504EC3171FED79650016851F']['buildSettings']
 bundle=config['PRODUCT_BUNDLE_IDENTIFIER']
-for name in ['504EC3171FED79650016851F','504EC3181FED79650016851F']:
- objects[name]['buildSettings']['MARKETING_VERSION']='1.3.0'
- objects[name]['buildSettings']['CURRENT_PROJECT_VERSION']='12'
 products=objects[proj['productRefGroup']]['children']
 main=objects[proj['mainGroup']]['children']
 refs=[];targets=[]
-for name,ui,files in [('KariUnitTests',False,['LifeWakeTests.swift','FeaturePolicyTests.swift','DeviceRuntimeTests.swift','NativeRegressionTests.swift','RemoteRegressionTests.swift','SessionRegressionTests.swift']),('KariUITests',True,['KariUITests.swift'])]:
+for name,ui,files in [('KariUnitTests',False,['MemoryRegressionTests.swift','LifeWakeTests.swift','FeaturePolicyTests.swift','DeviceRuntimeTests.swift','NativeRegressionTests.swift','RemoteRegressionTests.swift','SessionRegressionTests.swift']),('KariUITests',True,['KariUITests.swift'])]:
  targetID=uid(name);product=add(name+'product',{'isa':'PBXFileReference','explicitFileType':'wrapper.cfbundle','includeInIndex':'0','path':name+'.xctest','sourceTree':'BUILT_PRODUCTS_DIR'})
  if product not in products:products.append(product)
  sourceIDs=[]

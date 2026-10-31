@@ -47,7 +47,7 @@ cd KARI-DF26-IOS
 open KARI.xcodeproj
 ```
 
-1. 等待 Xcode 解析 GoogleSignIn 和固定 revision 的 MediaPipe Swift Package 依赖，选择 **KARI** scheme。
+1. 首次构建先在终端运行 `npm run build:embedding`，从固定上游版本编译 iOS 15 兼容的 llama.cpp 运行库（需要 Git、CMake 和 Xcode；二进制不提交）。然后等待 Xcode 解析 GoogleSignIn 和固定 revision 的 MediaPipe Swift Package 依赖，选择 **KARI** scheme。
 2. 设置自己的签名和 Bundle Identifier。推荐复制本地配置模板：
 
    ```sh
@@ -159,7 +159,7 @@ cd KARI-DF26-IOS
 open KARI.xcodeproj
 ```
 
-1. Allow Xcode to resolve the GoogleSignIn Swift Package dependencies and select the **KARI** scheme.
+1. Run `npm run build:embedding` first to build the pinned iOS 15 compatible llama.cpp runtime (Git, CMake and Xcode required; generated binaries are not committed). Then allow Xcode to resolve the GoogleSignIn Swift Package dependencies and select the **KARI** scheme.
 2. Copy `Config/Signing.local.xcconfig.example` to `Config/Signing.local.xcconfig`. Set your own `DEVELOPMENT_TEAM` and unique `PRODUCT_BUNDLE_IDENTIFIER`. This local file is ignored by Git. Alternatively configure your own Team in Xcode's Signing & Capabilities, keeping personal signing edits out of commits.
 3. Select your iPhone, build and run, then grant the required camera, microphone and Bluetooth permissions.
 4. Open **AI 服务** (AI services), select a provider and model, enter your own credentials, and test sound and AI before starting. A robot is optional.
@@ -250,3 +250,9 @@ Device management → Firmware update has a persistent **Preview firmware update
 图标采用已确认的逆时针 45° K 与非等距格纹。Xcode 直接编译 `App/AppIcon.icon`；运行 `npm run build:icons` 可重新生成兼容 PNG 和带透明圆角的 README 图标（需要 macOS 与 Xcode / Icon Composer）。
 
 The approved icon uses a K rotated 45° counterclockwise with an aligned, unequally spaced grid. Xcode compiles `App/AppIcon.icon` directly. Run `npm run build:icons` on macOS with Xcode / Icon Composer to regenerate the compatibility PNG and transparent rounded README image.
+
+## 1.4.0 记忆库 / Memory library
+
+新增资料导入、OCR、来源检索和按需下载的本机向量模型；保留连续语音与动作授权隔离。详见 [功能说明](docs/ios-memory-1.4.0.md) 与 [本轮验证](docs/validation-1.4.0.md)。
+
+Adds document import, OCR, cited retrieval and on-demand local embedding models. See the feature and validation documents above. Personal credentials, document data and model weights are excluded.
